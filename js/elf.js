@@ -227,7 +227,7 @@ class Elf {
         const speed = this.speed + speedUpgrades * 1;
 
         if (!this.dash.dashing) {
-            this.vel.x = leftKeyDown ? -1 : rightKeyDown ? 1 : 0;
+            this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
             this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
         } else {
             const dashSpeed = (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * elf.dash.speed;
@@ -265,6 +265,7 @@ class Elf {
             elf.dash.dashing = true;
             elf.dash.startFrameCount = frameCount;
         }
+        
     }
 
     drawDashCoolDown() {

@@ -30,6 +30,8 @@ function draw() {
     Game.update();
     image(bgCnv, 0, 0)
     image(cnv, 0, 0)
+
+    
 }
 
 
@@ -43,12 +45,16 @@ function keyPressed() {
 
     if (keyCode === ENTER) Game.enterPressed();
     if (key === ' ') Elf.spacePressed();
+    return false;
 }
 
 function keyReleased() {
     if (keyCode === LEFT_ARROW) leftKeyDown = false;
     if (keyCode === RIGHT_ARROW) rightKeyDown = false;
 }
+
+// if (keyIsDown(LEFT_ARROW)) true;
+// if (keyIsDown(RIGHT_ARROW)) moveRight();
 
 function createSceneBackground() {
     bgCnv.background('#333')
@@ -87,3 +93,5 @@ function mousePressed() {
         Game.mousePressed('left');
     }
 }
+
+
