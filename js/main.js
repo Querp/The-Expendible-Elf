@@ -27,6 +27,6 @@ function keyPressed() {
 
 function mousePressed() {
     if (mouseButton === LEFT) {
-        Game.mousePressed('left');
+        Game.leftMousePressed();
     }
 }

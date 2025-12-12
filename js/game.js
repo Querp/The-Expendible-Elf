@@ -49,7 +49,7 @@ class Game {
         this.roundStartFrameCount = frameCount;
     }
 
-    static mousePressed() {
+    static leftMousePressed() {
         if (this.roundHasStarted) return
 
         const buttonName = Button.getClickedButtonName();
