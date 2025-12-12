@@ -2,6 +2,13 @@ class Game {
     static roundCounter = 1;
     static roundHasStarted = false;
     static roundStartFrameCount;
+
+    static round = {
+        counter: 1,
+        hasStarted: false,
+        startFrameCount: null,
+    };
+
     static nextPresentFrame = 0;
     static spawnInterval = 120;
     static balance = 0;

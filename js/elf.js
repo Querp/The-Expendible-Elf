@@ -27,55 +27,14 @@ class Elf {
     }
 
     update() {
-        elf.calcLimbAngles();
-        elf.calcSelfAngle();
+        calcElfLimbAngles(this);
+        calcElfSelfAngle(this);
         elf.checkEndOfDash();
         elf.move();
         drawElf(this);
     }
 
-    calcSelfAngle() {
-        let targetAngle = this.vel.x * 3;
-        if (this.dash.dashing) this.vel.x * 90;
-        this.angle.self = lerp(this.angle.self, targetAngle, 0.15);
-        if (this.dash.dashing) this.angle.self = this.vel.x * 90;
-    }
-
-    calcLimbAngles() {
-        let lerpSpeed = 0.18;
-        const frameDuration = 5;
-
-        if (this.dash.dashing) {
-            this.angle.leg.left = 0;
-            this.angle.leg.right = 0;
-            this.angle.arm.left = 170;
-            this.angle.arm.right = -170;
-        }
-
-        if (this.vel.x === 0) {
-            this.angle.leg.left = lerp(this.angle.leg.left, 0, lerpSpeed * 4)
-            this.angle.leg.right = lerp(this.angle.leg.right, 0, lerpSpeed * 4);
-            this.angle.arm.left = lerp(this.angle.arm.left, -150, lerpSpeed * 4);
-            this.angle.arm.right = lerp(this.angle.arm.right, 150, lerpSpeed * 4);
-            return
-        }
-
-        const dirs = [0.3, 1.3, 0.7, 0, -0.3, -1.3, -0.7, 0];
-        const keyFrames = dirs.length;
-        const loopDuration = keyFrames * frameDuration;
-
-        // which keyframe (0–7)
-        const currentFrame = floor(frameCount % loopDuration / frameDuration);
-
-        // desired direction pattern
-        const dir = dirs[currentFrame];
-
-        this.angle.leg.left = lerp(this.angle.leg.left, -dir * 75, lerpSpeed)
-        this.angle.leg.right = lerp(this.angle.leg.right, dir * 75, lerpSpeed)
-
-        this.angle.arm.left = lerp(this.angle.arm.left, dir * 105, lerpSpeed)
-        this.angle.arm.right = lerp(this.angle.arm.right, -dir * 105, lerpSpeed)
-    }
+    
 
     move() {
         const speedUpgrades = Game.upgrades['speed'].amount;
