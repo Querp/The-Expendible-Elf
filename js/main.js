@@ -6,7 +6,7 @@ function setup() {
     setupDrawingModes();
     elf = new Elf();
     Button.createUiButtons();
-    InitBackgroundCanvas();
+    createBackground();
 }
 
 function draw() {

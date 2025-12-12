@@ -1,4 +1,4 @@
-function InitBackgroundCanvas() {
+function createBackground() {
     bgCnv.background('#333')
 
     // gradient bg
