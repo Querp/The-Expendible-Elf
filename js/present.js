@@ -5,8 +5,8 @@ class Present {
     static fallSpeed = 1.45;
 
     constructor() {
-        let dropHeight = height * -0.05;
-        dropHeight = height * 0.95;
+        let dropHeight = -10;
+        dropHeight = height * 0.5;
         const rubbleRange = 15;
 
         this.pos = { x: random(width), y: dropHeight };
@@ -82,16 +82,33 @@ class Present {
             return
         }
 
-        // is there an elf below?
-        const distance = abs(this.pos.x - elf.pos.x);
-
-        // present caught!
-        if (distance < 26) {
+        // CHECK IF THERE IS ELF TO CATCH
+        if (this.isThereElfBelow()) {
             this.hasBeenCaught = true;
             this.hasBeenCaughtAtFrameCount = frameCount;
             // elf.gotHitByPresent(); 
             Game.balance += 50;
         }
+
+
+        // // is there an elf below?
+        // const distance = abs(this.pos.x - elf.pos.x);
+
+        // // present caught!
+        // if (distance < 26) {
+        //     this.hasBeenCaught = true;
+        //     this.hasBeenCaughtAtFrameCount = frameCount;
+        //     // elf.gotHitByPresent(); 
+        //     Game.balance += 50;
+        // }
+    }
+
+    isThereElfBelow() {
+        for (let elf of Elf.elves) {
+            const distance = abs(this.pos.x - elf.pos.x);
+            if (distance < 26) return true
+        }
+        return false
     }
 
     static drawAllPresents() {

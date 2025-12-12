@@ -14,11 +14,13 @@ class Game {
     static upgrades = {
         health: { amount: 0, price: 100, max: 100 },
         speed: { amount: 0, price: 250, max: 20 },
-        dash: { amount: 0, price: 800, max: 5 }, 
-        intern: { amount: 0, price: 3000, max: 3 },
+        dash: { amount: 0, price: 600, max: 5 },
+        intern: { amount: 0, price: 1000, max: 3 },
     }
 
     static update() {
+        Intern.drawAllInterns()
+
         if (!this.round.hasStarted) {
             Present.drawAllPresents();
             // elf.update();
@@ -51,6 +53,7 @@ class Game {
         Present.presents = [];
         this.health = 1000;
         this.round.startFrameCount = frameCount;
+        Intern.prepareNextRound();
     }
 
     static drawUi() {
@@ -94,8 +97,8 @@ class Game {
         if (this.upgrades[buttonName].amount === this.upgrades[buttonName].max) return
 
         if (buttonName === 'intern') { }
-        if (buttonName === 'dash') { 
-            if(this.upgrades['dash'].amount === 0){
+        if (buttonName === 'dash') {
+            if (this.upgrades['dash'].amount === 0) {
                 Button.buttons[1].text = "Upgrade Dash"
             }
         }
@@ -110,8 +113,9 @@ class Game {
         }
     }
 
-    static downArrowPressed(){
-        console.log('Effigy!');
-        
+    static downArrowPressed() {
+        if (this.upgrades.intern.amount > 0 || true) {
+            Intern.placeIntern(elf.pos.x);
+        }
     }
 }

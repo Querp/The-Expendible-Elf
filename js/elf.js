@@ -1,5 +1,8 @@
 class Elf {
-    constructor(x = width / 2, y = height - 50, scalar = 1) {
+    static elves = [];
+    
+    constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1) {
+        this.type = type;
         this.pos = { x: x, y: y };
         this.vel = { x: 0, y: 0 };
         this.speed = 10;
@@ -11,6 +14,8 @@ class Elf {
         this.eyePosX = { left: -2.5, right: 2.5 }
         this.scalar = scalar;
         this.animationToPlay = 'walk';
+        
+        Elf.elves.push(this);
     }
 
     update() {
@@ -56,17 +61,5 @@ class Elf {
             Dash.startFrameCount = frameCount;
         }
     }
-
-    static dash(){
-        
-    }
-
-    // getEffectiveDashCooldown() {
-    //     const reductionPerUpgrade = 50;
-    //     const minReduction = 10;
-    //     const base = this.duration + this.cooldownDuration;
-    //     const reduced = base - Game.upgrades.dash.amount * reductionPerUpgrade;
-    //     return constrain(reduced, this.duration + minReduction, base);
-    // }
 
 }

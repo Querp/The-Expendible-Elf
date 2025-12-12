@@ -1,13 +1,9 @@
 TO DO
 
-Seperate all upgrade logic and dash related stuff
-Implement dash upgrades 
-    
-Dash cooldown
-Dash unlock + upgrades
 Start Screen
 Menu keyboard navigation
 Add pickups (in-round upgrades, not permanent)
+Give interns unique colors
 
 
 UPGRADES
@@ -18,3 +14,8 @@ dash            locked
     duration    50          +5
     speed                   
 intern          locked      +1x
+
+
+BUGS
+reset dash cooldown on death
+dash healthbar is drawn on all elves
