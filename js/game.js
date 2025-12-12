@@ -1,5 +1,5 @@
 class Game {
-    static balance = 9990;
+    static balance = 0;
     static health = 1000;
     static healthBar = { height: 1000, }
     static round = {
