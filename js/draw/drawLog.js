@@ -9,8 +9,8 @@ function toggleLog() {
 function drawLog() {
     if (!isLogToBeDrawn) return;
 
-    const effective = elf.getEffectiveDashCooldown();
-    const endFrame = elf.dash.startFrameCount + effective;
+    const effective = Dash.getEffectiveDashCooldown();
+    const endFrame = Dash.startFrameCount + effective;
     const remaining = max(endFrame - frameCount, 0)
 
     const logItems = [

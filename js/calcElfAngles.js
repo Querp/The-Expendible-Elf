@@ -1,7 +1,7 @@
 function calcElfSelfAngle(elf) {
     let multiplier = 3
     let lerpSpeed = 0.15;
-    if (elf.dash.dashing) {
+    if (Dash.dashing) {
         multiplier = 90;
         lerpSpeed = 0.3;
     }
@@ -14,7 +14,7 @@ function calcElfLimbAngles(elf) {
     let lerpSpeed = 0.18;
     const frameDuration = 5;
 
-    if (elf.dash.dashing) {
+    if (Dash.dashing) {
         elf.angle.leg.left = 0;
         elf.angle.leg.right = 0;
         elf.angle.arm.left = 25;
@@ -42,7 +42,7 @@ function calcElfLimbAngles(elf) {
     elf.angle.leg.left = lerp(elf.angle.leg.left, -dir * 75, lerpSpeed)
     elf.angle.leg.right = lerp(elf.angle.leg.right, dir * 75, lerpSpeed)
 
-    if (elf.dash.dashing) return
+    if (Dash.dashing) return
     
     elf.angle.arm.left = lerp(elf.angle.arm.left, dir * 105, lerpSpeed)
     elf.angle.arm.right = lerp(elf.angle.arm.right, -dir * 105, lerpSpeed)

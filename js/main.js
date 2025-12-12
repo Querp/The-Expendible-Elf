@@ -23,6 +23,7 @@ function keyPressed() {
     if (keyCode === ENTER) Game.enterPressed();
     if (key === ' ') Elf.spacePressed();
     if (keyCode === TAB) toggleLog();
+    if (keyCode === DOWN_ARROW) Game.downArrowPressed();
     return false;
 }
 

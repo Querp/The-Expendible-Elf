@@ -143,8 +143,8 @@ function drawElfLegRight(elf) {
 }
 
 function drawElfDashCoolDown() {
-    const effective = elf.getEffectiveDashCooldown();
-    const passed = frameCount - elf.dash.startFrameCount;
+    const effective = Dash.getEffectiveDashCooldown();
+    const passed = frameCount - Dash.startFrameCount;
 
     const maxW = 40;
     const w = map(passed, 0, effective, maxW, 0, true); // true = clamp

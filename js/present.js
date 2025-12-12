@@ -37,7 +37,7 @@ class Present {
         const elapsed = frameCount - Game.round.startFrameCount;
 
         Game.present.spawnInterval = max(45, 200 - elapsed * 0.03);
-        Game.present.spawnInterval = 1;
+        Game.present.spawnInterval = 30;
 
         if (frameCount >= Game.present.nextPresentFrame) {
             new Present();

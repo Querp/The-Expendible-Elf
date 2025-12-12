@@ -13,8 +13,8 @@ class Game {
     }
     static upgrades = {
         health: { amount: 0, price: 100, max: 100 },
-        speed: { amount: 0, price: 250, max: 100 },
-        dash: { amount: 0, price: 800, max: 7 }, 
+        speed: { amount: 0, price: 250, max: 20 },
+        dash: { amount: 0, price: 800, max: 5 }, 
         intern: { amount: 0, price: 3000, max: 3 },
     }
 
@@ -108,5 +108,10 @@ class Game {
             this.balance -= price;
             this.upgrades[buttonName].amount++;
         }
+    }
+
+    static downArrowPressed(){
+        console.log('Effigy!');
+        
     }
 }
