@@ -6,7 +6,7 @@ class Present {
 
     constructor() {
         let dropHeight = height * -0.05;
-        // dropHeight = height * 0.65;
+        dropHeight = height * 0.95;
         const rubbleRange = 15;
 
         this.pos = { x: random(width), y: dropHeight };
@@ -37,7 +37,7 @@ class Present {
         const elapsed = frameCount - Game.round.startFrameCount;
 
         Game.present.spawnInterval = max(45, 200 - elapsed * 0.03);
-        // Game.present.spawnInterval = 1;
+        Game.present.spawnInterval = 1;
 
         if (frameCount >= Game.present.nextPresentFrame) {
             new Present();

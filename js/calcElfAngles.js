@@ -17,8 +17,8 @@ function calcElfLimbAngles(elf) {
     if (elf.dash.dashing) {
         elf.angle.leg.left = 0;
         elf.angle.leg.right = 0;
-        elf.angle.arm.left = 170;
-        elf.angle.arm.right = -170;
+        elf.angle.arm.left = 25;
+        elf.angle.arm.right = -25;
     }
 
     if (elf.vel.x === 0) {

@@ -14,6 +14,7 @@ function draw() {
     Game.update();
     image(bgCnv, 0, 0)
     image(cnv, 0, 0)
+    drawLog();
 }
 
 
@@ -21,7 +22,7 @@ function draw() {
 function keyPressed() {
     if (keyCode === ENTER) Game.enterPressed();
     if (key === ' ') Elf.spacePressed();
-    if (keyCode === TAB) return false
+    if (keyCode === TAB) toggleLog();
     return false;
 }
 

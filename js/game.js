@@ -1,5 +1,5 @@
 class Game {
-    static balance = 0;
+    static balance = 9990;
     static health = 1000;
     static healthBar = { height: 1000, }
     static round = {
@@ -12,10 +12,10 @@ class Game {
         spawnInterval: 120,
     }
     static upgrades = {
-        health: { amount: 0, price: 100 },
-        speed: { amount: 0, price: 250 },
-        dash: { amount: 2, price: 800 },
-        intern: { amount: 0, price: 3000 },
+        health: { amount: 0, price: 100, max: 100 },
+        speed: { amount: 0, price: 250, max: 100 },
+        dash: { amount: 0, price: 800, max: 7 }, 
+        intern: { amount: 0, price: 3000, max: 3 },
     }
 
     static update() {
@@ -90,8 +90,15 @@ class Game {
             return
         }
 
+        // check if upgrade is maxed 
+        if (this.upgrades[buttonName].amount === this.upgrades[buttonName].max) return
+
         if (buttonName === 'intern') { }
-        if (buttonName === 'dash') { }
+        if (buttonName === 'dash') { 
+            if(this.upgrades['dash'].amount === 0){
+                Button.buttons[1].text = "Upgrade Dash"
+            }
+        }
         if (buttonName === 'speed') { }
         if (buttonName === 'health') { }
 

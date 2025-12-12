@@ -42,6 +42,7 @@ class Elf {
             this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
             this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
         } else {
+            // DASH
             const dashSpeed = (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * elf.dash.speed;
             this.pos.x += dashSpeed;
         }
@@ -70,9 +71,11 @@ class Elf {
     }
 
     getEffectiveDashCooldown() {
+        const reductionPerUpgrade = 50;
+        const minReduction = 10;
         const base = this.dash.duration + this.dash.cooldownDuration;
-        const reduced = base - Game.upgrades.dash.amount * 10;
-        return constrain(reduced, 90, base);
+        const reduced = base - Game.upgrades.dash.amount * reductionPerUpgrade;
+        return constrain(reduced, this.dash.duration + minReduction, base);
     }
 
 }

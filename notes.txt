@@ -2,12 +2,12 @@ TO DO
 
 Seperate all upgrade logic and dash related stuff
 Implement dash upgrades 
-    1 = unlock + change button.text 
-    2 = speed + cooldown 
+    
 Dash cooldown
 Dash unlock + upgrades
 Start Screen
 Menu keyboard navigation
+Add pickups (in-round upgrades, not permanent)
 
 
 UPGRADES
