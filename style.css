@@ -27,7 +27,7 @@ body {
 
     @media(width < 1200px) {
         canvas {
-            filter: hue-rotate(180deg) saturate(50);
+            /* filter: hue-rotate(180deg) saturate(50); */
         }
 
         &::after {

@@ -12,53 +12,18 @@ class Button {
         Button.buttons.push(this)
     }
 
+    static createUiButtons() {
+        new Button('intern', 'Hire Intern', width / 2, height / 2 - 200, 500, 100)
+        new Button('dash', 'Unlock Dash', width / 2, height / 2 - 100, 500, 100)
+        new Button('speed', 'Speed', width / 2, height / 2, 500, 100)
+        new Button('health', 'Health', width / 2, height / 2 + 100, 500, 100)
+        new Button('start', 'Start Game', width / 2, height / 2 + 200, 500, 100)
+    }
+
     isHovered() {
         const mouseXIsIn = mouseX >= this.x - this.width / 2 && mouseX <= this.x + this.width / 2;
         const mouseYIsIn = mouseY >= this.y - this.height / 2 && mouseY <= this.y + this.height / 2;
         if (mouseXIsIn && mouseYIsIn) return true
-    }
-
-    draw() {
-        // outline
-        cnv.fill('#c3c3c3ff');
-        if (this.isHovered()) cnv.fill('#fff')
-        cnv.strokeWeight(3);
-        cnv.stroke('#222')
-        cnv.rect(this.x, this.y, this.width, this.height)
-
-        // title
-        cnv.textSize(25)
-        cnv.fill('#000')
-        cnv.noStroke();
-        if (this.name === 'start') {
-            cnv.textSize(35)
-            cnv.text(this.text, this.x, this.y - 4)
-            cnv.textSize(10)
-            cnv.text('[ ENTER ]', this.x, this.y + 18)
-            return
-        }
-        cnv.noStroke();
-        cnv.text(this.text, this.x, this.y - 8)
-
-
-        // cost
-        const price = `$ ${Game.upgrades[this.name].price}`;
-        cnv.textSize(15)
-        cnv.text(price, this.x, this.y + 15)
-
-        // amount
-        const amount = Game.upgrades[this.name].amount;
-        cnv.textSize(25)
-        cnv.text(amount, this.x - 150, this.y)
-
-        // stat value
-        let statValue;
-        cnv.textSize(25)
-        if (this.name === 'intern') statValue = Game.upgrades[this.name].amount;
-        if (this.name === 'dash') statValue = `${3 - Game.upgrades[this.name].amount * 0.5}s`;
-        if (this.name === 'speed') statValue = `${elf.speed + Game.upgrades[this.name].amount}vel`;
-        if (this.name === 'health') statValue = `${Game.health + Game.upgrades[this.name].amount * 100}`;
-        cnv.text(statValue, this.x + 150, this.y)
     }
 
     static getClickedButtonName() {
@@ -72,13 +37,12 @@ class Button {
         return false
     }
 
-    static drawUpgradeMenu() {
+    static drawMenu() {
         if (Game.roundCounter === 1) {
-            cnv.textSize(90)
-            cnv.fill('#ddd')
-            cnv.text('The Expendible Elf', width / 2, 150)
+            drawMenuWelcome(this);
             this.buttons[4].y = height / 2;
-            this.buttons[4].draw();
+            drawMenuButton(this.buttons[4]);
+
             return
         }
         if (Game.roundCounter === 2) {
@@ -87,7 +51,8 @@ class Button {
         };
 
         for (let button of this.buttons) {
-            button.draw();
+            drawMenuButton(button);
         }
     }
+
 }
