@@ -18,7 +18,6 @@ class Game {
         intern: { amount: 0, price: 3000 },
     }
 
-
     static update() {
         if (!this.round.hasStarted) {
             Present.drawAllPresents();
@@ -54,6 +53,29 @@ class Game {
         this.round.startFrameCount = frameCount;
     }
 
+    static drawUi() {
+        if (!this.round.hasStarted && this.round.counter === 1) return
+        drawUiBalance(this);
+        if (!this.round.hasStarted) return
+        drawUiHealthBar(this);
+    }
+
+    static changeHealth(amount) {
+        this.health += amount;
+        this.health = constrain(this.health, 0, 10000);
+    }
+
+    static calcHealthBar() {
+        const diff = (this.health + this.upgrades['health'].amount * 100 - this.healthBar.height) * 0.1;
+        this.healthBar.height += diff;
+    }
+
+    static enterPressed() {
+        if (this.round.hasStarted) return
+        this.round.hasStarted = true;
+        this.prepareNextRound();
+    }
+
     static leftMousePressed() {
         if (this.round.hasStarted) return
 
@@ -75,31 +97,9 @@ class Game {
 
         const price = this.upgrades[buttonName].price;
         if (this.balance >= price) {
+            // Buy Upgrade
             this.balance -= price;
             this.upgrades[buttonName].amount++;
         }
-    }
-
-    static enterPressed() {
-        if (this.round.hasStarted) return
-        this.round.hasStarted = true;
-        this.prepareNextRound();
-    }
-
-    static drawUi() {
-        if (!this.round.hasStarted && this.round.counter === 1) return
-        drawUiBalance(this);
-        if (!this.round.hasStarted) return
-        drawUiHealthBar(this);
-    }
-
-    static changeHealth(amount) {
-        this.health += amount;
-        this.health = constrain(this.health, 0, 10000);
-    }
-
-    static calcHealthBar() {
-        const diff = (this.health + this.upgrades['health'].amount * 100 - this.healthBar.height) * 0.1;
-        this.healthBar.height += diff;
     }
 }

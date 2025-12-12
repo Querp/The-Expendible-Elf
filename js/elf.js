@@ -28,6 +28,12 @@ class Elf {
         drawElf(this);
     }
 
+    checkEndOfDash() {
+        if (frameCount - this.dash.startFrameCount >= this.dash.duration) {
+            elf.dash.dashing = false;
+        }
+    }
+
     move() {
         const speedUpgrades = Game.upgrades['speed'].amount;
         const speed = this.speed + speedUpgrades * 1;
@@ -49,18 +55,7 @@ class Elf {
         this.pos.x = constrain(this.pos.x, 12, width - 12);
     }
 
-    getEffectiveDashCooldown() {
-        const base = this.dash.duration + this.dash.cooldownDuration;
-        const reduced = base - Game.upgrades.dash.amount * 10;
-        return constrain(reduced, 90, base);
-    }
-
-    checkEndOfDash() {
-        if (frameCount - this.dash.startFrameCount >= this.dash.duration) {
-            elf.dash.dashing = false;
-        }
-    }
-
+    // Dash
     static spacePressed() {
         if (Game.upgrades.dash.amount === 0) return
         if (!Game.round.hasStarted) return
@@ -73,4 +68,11 @@ class Elf {
             elf.dash.startFrameCount = frameCount;
         }
     }
+
+    getEffectiveDashCooldown() {
+        const base = this.dash.duration + this.dash.cooldownDuration;
+        const reduced = base - Game.upgrades.dash.amount * 10;
+        return constrain(reduced, 90, base);
+    }
+
 }
