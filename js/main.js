@@ -4,9 +4,9 @@ let cnv;
 
 function setup() {
     setupDrawingModes();
-    elf = new Elf();
-    Button.createUiButtons();
     createBackground();
+    Button.createUiButtons();
+    elf = new Elf();
 }
 
 function draw() {
@@ -19,14 +19,12 @@ function draw() {
 
 
 function keyPressed() {
-    if (keyCode === TAB) return false
     if (keyCode === ENTER) Game.enterPressed();
     if (key === ' ') Elf.spacePressed();
+    if (keyCode === TAB) return false
     return false;
 }
 
 function mousePressed() {
-    if (mouseButton === LEFT) {
-        Game.leftMousePressed();
-    }
+    if (mouseButton === LEFT) Game.leftMousePressed();
 }
