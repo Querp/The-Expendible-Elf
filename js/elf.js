@@ -5,14 +5,8 @@ class Elf {
         this.speed = 10;
         this.angle = {
             self: 0,
-            arm: {
-                left: -7,
-                right: 155,
-            },
-            leg: {
-                left: 0,
-                right: 0,
-            }
+            arm: { left: -7, right: 155, },
+            leg: { left: 0, right: 0, }
         };
         this.eyePosX = { left: -2.5, right: 2.5 }
         this.scalar = scalar;
@@ -33,8 +27,6 @@ class Elf {
         elf.move();
         drawElf(this);
     }
-
-    
 
     move() {
         const speedUpgrades = Game.upgrades['speed'].amount;
@@ -58,13 +50,8 @@ class Elf {
     }
 
     getEffectiveDashCooldown() {
-        // base durations
         const base = this.dash.duration + this.dash.cooldownDuration;
-
-        // upgrade influence
         const reduced = base - Game.upgrades.dash.amount * 10;
-
-        // clamp to sane limits
         return constrain(reduced, 90, base);
     }
 
@@ -76,7 +63,7 @@ class Elf {
 
     static spacePressed() {
         if (Game.upgrades.dash.amount === 0) return
-        if (!Game.roundHasStarted) return
+        if (!Game.round.hasStarted) return
 
         const effective = elf.getEffectiveDashCooldown();
         const endFrame = elf.dash.startFrameCount + effective;

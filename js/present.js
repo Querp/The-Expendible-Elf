@@ -34,14 +34,14 @@ class Present {
     }
 
     static updatePresentSpawn() {
-        const elapsed = frameCount - Game.roundStartFrameCount;
+        const elapsed = frameCount - Game.round.startFrameCount;
 
-        Game.spawnInterval = max(45, 200 - elapsed * 0.03);
-        // Game.spawnInterval = 1;
+        Game.present.spawnInterval = max(45, 200 - elapsed * 0.03);
+        // Game.present.spawnInterval = 1;
 
-        if (frameCount >= Game.nextPresentFrame) {
+        if (frameCount >= Game.present.nextPresentFrame) {
             new Present();
-            Game.nextPresentFrame = frameCount + Game.spawnInterval;
+            Game.present.nextPresentFrame = frameCount + Game.present.spawnInterval;
         }
     }
 
@@ -72,7 +72,7 @@ class Present {
         // has present hit floor?
         if (this.pos.y === height - 25) {
             this.hasFallenToTheFloor = true;
-            if (!Game.roundHasStarted) return
+            if (!Game.round.hasStarted) return
             Game.health -= 250
             return
         }
