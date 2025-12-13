@@ -11,14 +11,14 @@ class Intern {
         }
     }
     static placeIntern(x) {
-        if (this.interns.length < Game.upgrades.intern.amount) {
+        if (this.interns.length < Upgrade.upgrades.intern.amount) {
             const intern = new Elf('intern', x, elf.pos.y, 1);
             this.lastPlacedIndex = this.interns.length;
             this.interns.push(intern);
             return
         } 
 
-        this.lastPlacedIndex = (this.lastPlacedIndex + 1) % (Game.upgrades.intern.amount);
+        this.lastPlacedIndex = (this.lastPlacedIndex + 1) % (Upgrade.upgrades.intern.amount);
         this.interns[this.lastPlacedIndex].pos.x = elf.pos.x
 
     }

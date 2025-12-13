@@ -17,7 +17,7 @@ class Dash {
 
     static getEffectiveDashCooldown() {
         const base = this.duration + this.cooldownDuration;
-        const reduced = base - Game.upgrades.dash.amount * this.reductionPerUpgrade;
+        const reduced = base - Upgrade.upgrades.dash.amount * this.reductionPerUpgrade;
         return constrain(reduced, this.duration + this.minReduction, base);
     }
 

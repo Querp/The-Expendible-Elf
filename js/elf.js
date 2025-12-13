@@ -27,7 +27,7 @@ class Elf {
     }
 
     move() {
-        const speedUpgrades = Game.upgrades['speed'].amount;
+        const speedUpgrades = Upgrade.upgrades['speed'].amount;
         const speed = this.speed + speedUpgrades * 1;
 
         if (!Dash.dashing) {
@@ -50,7 +50,7 @@ class Elf {
 
     // Dash
     static spacePressed() {
-        if (Game.upgrades.dash.amount === 0) return
+        if (Upgrade.upgrades.dash.amount === 0) return
         if (!Game.round.hasStarted) return
 
         const effective = Dash.getEffectiveDashCooldown();

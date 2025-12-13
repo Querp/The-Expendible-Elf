@@ -1,13 +1,20 @@
 TO DO
 
-Start Screen
-Menu keyboard navigation
-Add pickups (in-round upgrades, not permanent)
-Give interns unique colors
+interns
+    unique colors
+    animate 
+start screen
+menu keyboard navigation
+add pickups (in-round upgrades, not permanent)
+
 Tests?
 
 
+
+
+
 UPGRADES
+
 health          1000        +100        (250 per present)
 speed           10          +1
 dash            locked      
@@ -17,5 +24,7 @@ dash            locked
 intern          locked      +1x
 
 
+
 BUGS
 reset dash cooldown on death
+interns put their arms down during dash

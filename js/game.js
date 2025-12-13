@@ -1,6 +1,7 @@
 class Game {
-    static balance = 0;
-    static health = 1000;
+    static balance = 1000;
+    static baseHealth = 1000
+    static health = this.baseHealth;
     static healthBar = { height: 1000, }
     static round = {
         counter: 1,
@@ -11,12 +12,12 @@ class Game {
         nextPresentFrame: 0,
         spawnInterval: 120,
     }
-    static upgrades = {
-        health: { amount: 0, price: 100, max: 100 },
-        speed: { amount: 0, price: 250, max: 20 },
-        dash: { amount: 1, price: 600, max: 5 },
-        intern: { amount: 5, price: 1000, max: 5 },
-    }
+    // static upgrades = {
+    //     health: { amount: 0, price: 100, max: 100 },
+    //     speed: { amount: 0, price: 250, max: 20 },
+    //     dash: { amount: 1, price: 600, max: 5 },
+    //     intern: { amount: 5, price: 1000, max: 5 },
+    // }
 
     static update() {
         Intern.drawAllInterns()
@@ -28,18 +29,20 @@ class Game {
             this.calcHealthBar();
             Button.drawMenu();
             this.drawUi();
+            Message.update();
             return
         }
-
+        
         elf.update();
         Present.update();
         this.checkEndOfRound();
         this.calcHealthBar();
         this.drawUi();
+        Message.update();
     }
 
     static checkEndOfRound() {
-        const healthUpgrades = this.upgrades['health'].amount;
+        const healthUpgrades = Upgrade.upgrades['health'].amount;
         const health = this.health + healthUpgrades * 100;
         if (health <= 0) this.endRound();
     }
@@ -58,9 +61,9 @@ class Game {
 
     static drawUi() {
         if (!this.round.hasStarted && this.round.counter === 1) return
-        drawUiBalance(this);
+        drawUiBalance();
         if (!this.round.hasStarted) return
-        drawUiHealthBar(this);
+        drawUiHealthBar();
     }
 
     static changeHealth(amount) {
@@ -69,7 +72,7 @@ class Game {
     }
 
     static calcHealthBar() {
-        const diff = (this.health + this.upgrades['health'].amount * 100 - this.healthBar.height) * 0.1;
+        const diff = (this.health + Upgrade.upgrades['health'].amount * 100 - this.healthBar.height) * 0.1;
         this.healthBar.height += diff;
     }
 
@@ -80,41 +83,37 @@ class Game {
     }
 
     static leftMousePressed() {
-        if (this.round.hasStarted) return
-
         const buttonName = Button.getClickedButtonName();
-        if (!buttonName) return
 
-        if (this.round.counter === 1 && buttonName !== 'start') return
-
+        if (!buttonName || this.round.hasStarted) return
+        
         if (buttonName === 'start') {
             this.round.hasStarted = true;
             this.prepareNextRound();
             return
         }
+        
+        if (Upgrade.isUpgradeMaxed(buttonName)) return
 
-        // check if upgrade is maxed 
-        if (this.upgrades[buttonName].amount === this.upgrades[buttonName].max) return
-
-        if (buttonName === 'intern') { }
-        if (buttonName === 'dash') {
-            if (this.upgrades['dash'].amount === 0) {
-                Button.buttons[1].text = "Upgrade Dash"
-            }
+        if (buttonName === 'dash' && Upgrade.upgrades.dash.amount === 0) {
+            Button.buttons[1].text = "Upgrade Dash"
         }
-        if (buttonName === 'speed') { }
-        if (buttonName === 'health') { }
 
-        const price = this.upgrades[buttonName].price;
+        const price = Upgrade.upgrades[buttonName].price;
+
         if (this.balance >= price) {
             // Buy Upgrade
             this.balance -= price;
-            this.upgrades[buttonName].amount++;
+            Upgrade.upgrades[buttonName].amount++;
+            new Message(`upgrade ${buttonName} bought`, 'success')
+        } else {
+            new Message(`not enough $ for ${buttonName}`, 'warning')
         }
+
     }
 
     static downArrowPressed() {
-        if (this.upgrades.intern.amount > 0 || true) {
+        if (Upgrade.upgrades.intern.amount > 0 || true) {
             Intern.placeIntern(elf.pos.x);
         }
     }
