@@ -32,7 +32,7 @@ function drawElf(elf) {
 
     cnv.rotate(radians(-elf.angle.self));
 
-    drawElfDashCoolDown(elf);
+    if (elf.type === 'player') drawElfDashCoolDown(elf);
     cnv.pop();
 }
 

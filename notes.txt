@@ -4,6 +4,7 @@ Start Screen
 Menu keyboard navigation
 Add pickups (in-round upgrades, not permanent)
 Give interns unique colors
+Tests?
 
 
 UPGRADES
@@ -18,4 +19,3 @@ intern          locked      +1x
 
 BUGS
 reset dash cooldown on death
-dash healthbar is drawn on all elves

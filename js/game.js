@@ -14,8 +14,8 @@ class Game {
     static upgrades = {
         health: { amount: 0, price: 100, max: 100 },
         speed: { amount: 0, price: 250, max: 20 },
-        dash: { amount: 0, price: 600, max: 5 },
-        intern: { amount: 0, price: 1000, max: 3 },
+        dash: { amount: 1, price: 600, max: 5 },
+        intern: { amount: 5, price: 1000, max: 5 },
     }
 
     static update() {
