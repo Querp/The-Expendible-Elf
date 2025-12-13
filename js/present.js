@@ -6,7 +6,7 @@ class Present {
 
     constructor() {
         let dropHeight = -10;
-        // dropHeight = height * 0.95;
+        // dropHeight = height * 0.75;
         const rubbleRange = 15;
 
         this.pos = { x: random(width), y: dropHeight };
@@ -37,7 +37,7 @@ class Present {
         const elapsed = frameCount - Game.round.startFrameCount;
 
         Game.present.spawnInterval = max(45, 200 - elapsed * 0.03);
-        // Game.present.spawnInterval = 30;
+        Game.present.spawnInterval = 30;
 
         if (frameCount >= Game.present.nextPresentFrame) {
             new Present();
@@ -82,25 +82,13 @@ class Present {
             return
         }
 
-        // CHECK IF THERE IS ELF TO CATCH
+        // check if there is elf to catch
         if (this.isThereElfBelow()) {
             this.hasBeenCaught = true;
             this.hasBeenCaughtAtFrameCount = frameCount;
             // elf.gotHitByPresent(); 
             Game.balance += 50;
         }
-
-
-        // // is there an elf below?
-        // const distance = abs(this.pos.x - elf.pos.x);
-
-        // // present caught!
-        // if (distance < 26) {
-        //     this.hasBeenCaught = true;
-        //     this.hasBeenCaughtAtFrameCount = frameCount;
-        //     // elf.gotHitByPresent(); 
-        //     Game.balance += 50;
-        // }
     }
 
     isThereElfBelow() {

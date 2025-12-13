@@ -20,7 +20,7 @@ function drawLog() {
         },
         {
             title: 'Health',
-            value: `${Game.health} / ${1000 + 100 * Upgrade.upgrades.health.amount}`,
+            value: `${Game.health} / ${Upgrade.calcStatValue('health')}`,
         },
         // {
         //     title: 0,

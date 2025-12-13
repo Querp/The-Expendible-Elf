@@ -24,8 +24,23 @@ dash            locked
     speed                   
 intern          locked      +1x
 
+edge-portal     (loops the player's x-axis)
+
+
+
+
+IN-ROUND UPGRADES
+Health crate    restore 500 hp
+
+
+
+
+
+
+
+
+
 
 
 BUGS
-reset dash cooldown on death
-interns put their arms down during dash
+log health is wrong 

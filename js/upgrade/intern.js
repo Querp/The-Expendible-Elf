@@ -6,7 +6,7 @@ class Intern {
     static drawAllInterns() {
         for (let intern of this.interns) {
             calcElfLimbAngles(intern);
-            calcElfSelfAngle(intern);
+            // calcElfSelfAngle(intern);
             drawElf(intern);
         }
     }

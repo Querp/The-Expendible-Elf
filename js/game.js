@@ -12,12 +12,6 @@ class Game {
         nextPresentFrame: 0,
         spawnInterval: 120,
     }
-    // static upgrades = {
-    //     health: { amount: 0, price: 100, max: 100 },
-    //     speed: { amount: 0, price: 250, max: 20 },
-    //     dash: { amount: 1, price: 600, max: 5 },
-    //     intern: { amount: 5, price: 1000, max: 5 },
-    // }
 
     static update() {
         Intern.drawAllInterns()
@@ -54,8 +48,9 @@ class Game {
 
     static prepareNextRound() {
         Present.presents = [];
-        this.health = 1000;
+        this.health = Upgrade.calcHealthStat();;
         this.round.startFrameCount = frameCount;
+        Dash.startFrameCount = -1000;
         Intern.prepareNextRound();
     }
 
@@ -64,6 +59,7 @@ class Game {
         drawUiBalance();
         if (!this.round.hasStarted) return
         drawUiHealthBar();
+        drawUiInternIcons();
     }
 
     static changeHealth(amount) {

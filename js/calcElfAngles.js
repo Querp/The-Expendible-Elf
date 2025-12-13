@@ -14,7 +14,7 @@ function calcElfLimbAngles(elf) {
     let lerpSpeed = 0.18;
     const frameDuration = 5;
 
-    if (Dash.dashing) {
+    if (Dash.dashing && elf.type === 'player') {
         elf.angle.leg.left = 0;
         elf.angle.leg.right = 0;
         elf.angle.arm.left = 25;
