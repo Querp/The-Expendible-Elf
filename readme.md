@@ -11,3 +11,5 @@ Open index.html to run the game.
 
 ## Play Game
 [https://the-expendible-elf.netlify.app/](https://the-expendible-elf.netlify.app/)
+
+![alt text](screen-shot.png)
