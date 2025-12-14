@@ -31,7 +31,7 @@ class Message {
     }
     static drawMessage(msg, i) {
         const x = 35;
-        const y = 165 + i * 32;
+        const y = 180 + i * 32;
         cnv.textAlign(LEFT);
         cnv.noStroke();
         cnv.textSize(25);

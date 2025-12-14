@@ -6,7 +6,7 @@ class Present {
 
     constructor() {
         let dropHeight = -10;
-        // dropHeight = height * 0.75;
+        // dropHeight = height * 0.95;
         const rubbleRange = 15;
 
         this.pos = { x: random(width), y: dropHeight };

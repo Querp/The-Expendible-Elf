@@ -38,9 +38,5 @@ Health crate    restore 500 hp
 
 
 
-
-
-
-
 BUGS
-log health is wrong 
+fix health bar
