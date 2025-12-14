@@ -39,7 +39,7 @@ class Button {
 
     static drawMenu() {
         if (Game.round.counter === 1) {
-            drawMenuWelcome(this);
+            drawMenuWelcome();
             this.buttons[4].y = height / 2;
             drawMenuButton(this.buttons[4]);
 

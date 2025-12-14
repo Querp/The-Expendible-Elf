@@ -30,14 +30,14 @@ class Upgrade {
         return base + upgrades * healthPerUpgrade;
     }
 
-    static computeSpeedStat() {
-
+    static calcSpeedStat() {
+        return null
     }
-    static computeDashStat() {
-
+    static calcDashStat() {
+        return null
     }
-    static computeInternStat() {
-
+    static calcInternStat() {
+        return null
     }
 
 }
