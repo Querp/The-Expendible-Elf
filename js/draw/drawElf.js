@@ -6,7 +6,6 @@ function drawElf(elf) {
     cnv.stroke(0);
     cnv.strokeWeight(0.2)
     cnv.noStroke();
-    // if (elf.scalar < 3) noStroke();
 
     drawElfHead(elf);
 
@@ -46,7 +45,7 @@ function drawElfHead(elf) {
     cnv.strokeWeight(0.1);
     cnv.stroke(255);
     let eyeLeftOffset = 0;  // perspective of user
-    let eyeRightOffset = 0;
+    let eyeRightOffset = 0; // perspective of user
     if (elf.vel.x === 1) eyeRightOffset = -1;
     if (elf.vel.x === -1) eyeLeftOffset = 1;
     const targetEyeLeftX = -2.5 + elf.vel.x * 7 + eyeLeftOffset * 2;
@@ -86,9 +85,7 @@ function drawElfArmLeft(elf) {
     cnv.translate(xOffset, 0)
     cnv.rotate(radians(elf.angle.arm.left + 90));
     cnv.rect(6.25, 0, 14, 1.7, 999)
-
     cnv.circle(13.5, 0, 3)
-    
     cnv.pop();
 }
 
@@ -150,7 +147,6 @@ function drawElfLegRight(elf) {
 function drawElfDashCoolDown() {
     const effective = Dash.getEffectiveDashCooldown();
     const passed = frameCount - Dash.startFrameCount;
-
     const maxW = 40;
     const w = map(passed, 0, effective, maxW, 0, true); // true = clamp
 

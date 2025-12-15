@@ -1,8 +1,8 @@
 class Upgrade {
     static upgrades = {
-        health: { amount: 100, price: 100, max: 100 },
+        health: { amount: 0, price: 100, max: 100 },
         speed: { amount: 20, price: 250, max: 20 },
-        dash: { amount: 5, price: 600, max: 5 },
+        dash: { amount: 1, price: 600, max: 5 },
         intern: { amount: 5, price: 1000, max: 5 },
     }
 
@@ -17,10 +17,10 @@ class Upgrade {
     }
 
     static calcStatValue(upgrade) {
-        if (upgrade === 'health') return this.calcHealthStat()
-        if (upgrade === 'speed') return this.calcSpeedStat()
-        if (upgrade === 'dash') return this.calcDashStat()
-        if (upgrade === 'intern') return this.calcInternStat()
+        if (upgrade === 'health') return this.calcHealthStat();
+        if (upgrade === 'speed') return this.calcSpeedStat();
+        if (upgrade === 'dash') return this.calcDashStat();
+        if (upgrade === 'intern') return this.calcInternStat();
     }
 
     static calcHealthStat() {

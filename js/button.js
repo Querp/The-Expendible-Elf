@@ -13,11 +13,15 @@ class Button {
     }
 
     static createUiButtons() {
-        new Button('intern', 'Hire Intern', width / 2, height / 2 - 200, 500, 100)
-        new Button('dash', 'Unlock Dash', width / 2, height / 2 - 100, 500, 100)
-        new Button('speed', 'Speed', width / 2, height / 2, 500, 100)
-        new Button('health', 'Health', width / 2, height / 2 + 100, 500, 100)
-        new Button('start', 'Start Game', width / 2, height / 2 + 200, 500, 100)
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const w = 500;
+        const h = 100;
+        new Button('intern', 'Hire Intern', centerX, centerY - h * 2, w, h)
+        new Button('dash', 'Unlock Dash', centerX, centerY - h, w, h)
+        new Button('speed', 'Speed', centerX, centerY, w, h)
+        new Button('health', 'Health', centerX, centerY + h, w, h)
+        new Button('start', 'Start Game', centerX, centerY + h * 2, w, h)
     }
 
     isHovered() {
@@ -46,7 +50,7 @@ class Button {
             return
         }
         if (Game.round.counter === 2) {
-            this.buttons[4].y = height / 2 + 200
+            this.buttons[4].y = height / 2 + 200;
             this.buttons[4].text = 'Continue Game'
         };
 

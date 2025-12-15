@@ -31,7 +31,6 @@ function drawUiHealthBar() {
 }
 
 
-
 function drawUiInternIcons() {
     const target = Upgrade.upgrades.intern.amount - Intern.interns.length;
     for (let i = 0; i < target; i++) {

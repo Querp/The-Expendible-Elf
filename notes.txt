@@ -1,5 +1,19 @@
 TO DO
 
+refactor
+    replace magic numbers
+    replace static collections for classes
+    add cooldown class for dash and present with a count down
+    add class setters
+    move catching logic from Present to Elf
+make debug controls for
+    starting / ending round
+    presents
+        drop height
+        drop interval
+    round timer add time
+    add / remove upgrades
+    add / remove balance
 interns
     unique colors
     animate 
@@ -8,7 +22,9 @@ menu keyboard navigation
 add pickups (in-round upgrades, not permanent)
 show round timer
 
-Tests?
+learn callbacks
+make custom input handlers -> one dispatcher, the rest registers
+tests?
 
 
 
@@ -40,3 +56,7 @@ Health crate    restore 500 hp
 
 BUGS
 fix health bar
+caught presents are marked for deletion but never deleted
+
+
+

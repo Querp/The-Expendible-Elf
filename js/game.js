@@ -48,7 +48,7 @@ class Game {
 
     static prepareNextRound() {
         Present.presents = [];
-        this.health = Upgrade.calcHealthStat();;
+        this.health = Upgrade.calcHealthStat();
         this.round.startFrameCount = frameCount;
         Dash.startFrameCount = -1000;
         Intern.prepareNextRound();
@@ -91,21 +91,24 @@ class Game {
         
         if (Upgrade.isUpgradeMaxed(buttonName)) return
 
+        // rename 'Unlock Dash'
         if (buttonName === 'dash' && Upgrade.upgrades.dash.amount === 0) {
-            Button.buttons[1].text = "Upgrade Dash"
+            Button.buttons[1].text = "Upgrade Dash";
         }
 
+        this.buyUpgrade(buttonName)
+    }
+
+    static buyUpgrade(buttonName){
         const price = Upgrade.upgrades[buttonName].price;
 
         if (this.balance >= price) {
-            // Buy Upgrade
             this.balance -= price;
             Upgrade.upgrades[buttonName].amount++;
             new Message(`upgrade ${buttonName} bought`, 'success')
         } else {
             new Message(`not enough $ for ${buttonName}`, 'warning')
         }
-
     }
 
     static downArrowPressed() {

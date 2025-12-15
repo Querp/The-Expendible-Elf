@@ -1,6 +1,6 @@
 class Elf {
     static elves = [];
-    
+
     constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1) {
         this.type = type;
         this.pos = { x: x, y: y };
@@ -14,7 +14,7 @@ class Elf {
         this.eyePosX = { left: -2.5, right: 2.5 }
         this.scalar = scalar;
         this.animationToPlay = 'walk';
-        
+
         Elf.elves.push(this);
     }
 
@@ -23,22 +23,34 @@ class Elf {
         calcElfSelfAngle(this);
         Dash.checkEndOfDash();
         elf.move();
+        elf.dash();
+        elf.checkWalls();
         drawElf(this);
     }
 
+    getSpeed() {
+        const speedUpgradesAmount = Upgrade.upgrades['speed'].amount;
+        return this.speed + speedUpgradesAmount * 1;
+    }
+
+    getDashSpeed() {
+        const speed = this.getSpeed();
+        return (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
+    }
+
     move() {
-        const speedUpgrades = Upgrade.upgrades['speed'].amount;
-        const speed = this.speed + speedUpgrades * 1;
+        if (Dash.dashing) return
+        const speed = this.getSpeed();
+        this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
+        this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
+    }
 
-        if (!Dash.dashing) {
-            this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
-            this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
-        } else {
-            // Dash
-            const dashSpeed = (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
-            this.pos.x += dashSpeed;
-        }
+    dash() {
+        if (!Dash.dashing) return
+        this.pos.x += this.getDashSpeed();
+    }
 
+    checkWalls() {
         if (this.pos.x < 12 || this.pos.x > width - 12) {
             this.vel.x = 0;
             Dash.dashing = false;

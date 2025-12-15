@@ -36,12 +36,16 @@ function drawPresent(present) {
             constrain(present.rubblePositions[0] * 1.5, 7, 12),
             constrain(present.rubblePositions[1] * 1.5, 7, 12),
         )
+
+        // draw coin
     } else if (present.hasBeenCaught) {
-        const alpha = 1 - (present.getRemainingTimeToDespawn() / Present.timeToDespawn);
+        const alpha = 1 - (present.getElapsedTimeSinceCatch() / Present.timeToDespawn);
         cnv.strokeWeight(1.3)
         cnv.stroke(color(48, 96, 29, alpha));
         cnv.fill(color(54, 100, 50, alpha));
         cnv.circle(present.pos.x, present.pos.y, 17)
+
+        // draw present
     } else {
         cnv.strokeWeight(1);
         cnv.stroke('#000');

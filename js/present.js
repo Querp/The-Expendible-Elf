@@ -3,24 +3,31 @@ class Present {
     static dropRate = 240;
     static timeToDespawn = 150;
     static fallSpeed = 1.45;
+    static colorHues = { pink: 325, blue: 210, green: 107, yellow: 48 };
+    static priceWhenCaught = 50;
+    // 'hsla(325, 50%, 50%, 1.00)' 'hsla(210, 50%, 50%, 1.00)' 
+    // 'hsla(107, 50%, 50%, 1.00)' 'hsla(48, 50%, 50%, 1.00)'
 
     constructor() {
-        let dropHeight = -10;
-        // dropHeight = height * 0.95;
         const rubbleRange = 15;
+        let dropHeight = -10;
+        dropHeight = height * 0.8;
 
         this.pos = { x: random(width), y: dropHeight };
-        this.color = color(random([0, 325, 210, 107, 48]), 50, 50, 1.0);
+        this.color = this.getRandomPresentColor();
         this.hasBeenCaught = false;
         this.hasBeenCaughtAtFrameCount;
         this.hasFallenToTheFloor = false;
         this.rubblePositions = [random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange)];
-        // 'hsla(325, 50%, 50%, 1.00)'
-        // 'hsla(210, 50%, 50%, 1.00)'
-        // 'hsla(107, 50%, 50%, 1.00)'
-        // 'hsla(48, 50%, 50%, 1.00)'
 
         Present.presents.push(this);
+    }
+
+    getRandomPresentColor() {
+        const keys = Object.keys(Present.colorHues);
+        const randomKey = random(keys);
+        const hue = Present.colorHues[randomKey]
+        return color(hue, 50, 50, 1.0);
     }
 
     static update() {
@@ -31,13 +38,15 @@ class Present {
             p.move();
             drawPresent(p);
         };
+
+        this.presents = this.presents.filter(p => !p._markedForDeletion);
     }
 
     static updatePresentSpawn() {
         const elapsed = frameCount - Game.round.startFrameCount;
 
         Game.present.spawnInterval = max(45, 200 - elapsed * 0.03);
-        Game.present.spawnInterval = 30;
+        // Game.present.spawnInterval = 30;
 
         if (frameCount >= Game.present.nextPresentFrame) {
             new Present();
@@ -45,21 +54,20 @@ class Present {
         }
     }
 
-    getRemainingTimeToDespawn() {
+    getElapsedTimeSinceCatch() {
         return frameCount - this.hasBeenCaughtAtFrameCount;
     }
 
     despawn() {
         if (this.hasBeenCaughtAtFrameCount) {
-            const elapsedTime = frameCount - this.hasBeenCaughtAtFrameCount;
-            if (elapsedTime > Present.timeToDespawn) {
+            if (this.getElapsedTimeSinceCatch() > Present.timeToDespawn) {
                 this._markedForDeletion = true;
             }
         }
     }
 
     move() {
-        if (this.hasBeenCaught && this.pos.y > height - 200) {
+        if (this.hasBeenCaught) {
             this.pos.y -= 0.5;
         }
         if (this.hasFallenToTheFloor || this.hasBeenCaught) return
@@ -87,7 +95,7 @@ class Present {
             this.hasBeenCaught = true;
             this.hasBeenCaughtAtFrameCount = frameCount;
             // elf.gotHitByPresent(); 
-            Game.balance += 50;
+            Game.balance += Present.priceWhenCaught;
         }
     }
 

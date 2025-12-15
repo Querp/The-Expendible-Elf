@@ -20,13 +20,11 @@ class Intern {
 
         this.lastPlacedIndex = (this.lastPlacedIndex + 1) % (Upgrade.upgrades.intern.amount);
         this.interns[this.lastPlacedIndex].pos.x = elf.pos.x
-
     }
 
     static prepareNextRound() {
         this.interns = [];
         Elf.elves = [Elf.elves[0]];
-
     }
 
 }

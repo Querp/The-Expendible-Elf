@@ -1,5 +1,5 @@
 let isLogToBeDrawn = false;
-isLogToBeDrawn = true;
+// isLogToBeDrawn = true;
 
 function toggleLog() {
     isLogToBeDrawn = !isLogToBeDrawn
