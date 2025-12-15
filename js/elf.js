@@ -34,16 +34,14 @@ class Elf {
             this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
             this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
         } else {
-            // DASH
+            // Dash
             const dashSpeed = (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
             this.pos.x += dashSpeed;
         }
 
         if (this.pos.x < 12 || this.pos.x > width - 12) {
             this.vel.x = 0;
-            if (Dash.dashing) {
-                Dash.dashing = false;
-            }
+            Dash.dashing = false;
         }
         this.pos.x = constrain(this.pos.x, 12, width - 12);
     }
