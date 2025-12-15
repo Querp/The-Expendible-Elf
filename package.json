@@ -1,0 +1,14 @@
+{
+  "name": "the-expendible-elf",
+  "version": "1.0.0",
+  "description": "A simple web game about catching presents.",
+  "scripts": {
+    "type-check": "tsc --noEmit  --project ./jsconfig.json",
+    "type-check:watch": "tsc --noEmit --watch --project ./jsconfig.json"
+  },
+  "homepage": "https://the-expendible-elf.netlify.app/",
+  "devDependencies": {
+    "@types/p5": "^1.7.7",
+    "typescript": "^5.9.3"
+  }
+}
