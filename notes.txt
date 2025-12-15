@@ -1,7 +1,6 @@
 TO DO
 
 refactor
-    replace magic numbers
     replace static collections for classes
     add cooldown class for dash and present with a count down
     add class setters
