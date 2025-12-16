@@ -21,13 +21,11 @@ class Dash {
         return constrain(reduced, this.duration + this.minReduction, base);
     }
 
+    static resetCooldown(){
+        this.startFrameCount = frameCount;
+    }
+
     static test(){
         console.log('Callback for Dash!');
     }
-
-    static resetCooldown(){
-        this.dashing = false;
-        this.startFrameCount = -1000;
-    }
-
 }

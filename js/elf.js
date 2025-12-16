@@ -28,8 +28,12 @@ class Elf {
     move() {
         if (Dash.dashing) return
         const speed = this.getSpeed();
-        this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
+        this.updateVel();
         this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
+    }
+
+    updateVel() {
+        this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
     }
 
     dash() {
@@ -65,8 +69,10 @@ class Elf {
             }
         }
     }
-    resetDash(){
+    resetDash() {
         if (!Dash.dashing) return
+        // redirect dash 
+        this.updateVel();
         Dash.resetCooldown();
     }
 

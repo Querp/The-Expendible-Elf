@@ -44,6 +44,10 @@ function drawPresent(present) {
         cnv.stroke(color(48, 96, 29, alpha));
         cnv.fill(color(54, 100, 50, alpha));
         cnv.circle(present.pos.x, present.pos.y, 17)
+        // draw coin value
+
+        cnv.textSize(18);
+        cnv.text(50,present.pos.x, present.pos.y - 25);
 
         // draw present
     } else {
