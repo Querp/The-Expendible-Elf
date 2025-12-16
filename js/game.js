@@ -10,12 +10,11 @@ class Game {
     };
 
     static update() {
-        Intern.drawAllInterns()
 
         if (!this.round.hasStarted) {
-            // elf.update();
             game.presents.update();
-            drawElf(elf)
+            game.elves.update();
+            game.elves.draw();
             this.calcHealthBar();
             Button.drawMenu();
             this.drawUi();
@@ -23,8 +22,10 @@ class Game {
             return
         }
         
-        elf.update();
         game.presents.update();
+        game.elves.update();
+        game.elves.draw();
+        
         this.checkEndOfRound();
         this.calcHealthBar();
         this.drawUi();
@@ -109,7 +110,8 @@ class Game {
 
     static downArrowPressed() {
         if (Upgrade.upgrades.intern.amount > 0 || true) {
-            Intern.placeIntern(elf.pos.x);
+            const player = game.elves.getPlayer();
+            Intern.placeIntern(player.pos.x);
         }
     }
 }

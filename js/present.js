@@ -77,7 +77,7 @@ class Present {
     }
 
     isThereElfBelow() {
-        for (let elf of Elf.elves) {
+        for (let elf of game.elves.elves) {
             const distance = abs(this.pos.x - elf.pos.x);
             if (distance < Present.CATCH_RANGE) return true
         }

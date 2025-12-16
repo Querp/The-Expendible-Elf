@@ -1,6 +1,4 @@
 class Elf {
-    static elves = [];
-
     constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1) {
         this.type = type;
         this.pos = { x: x, y: y };
@@ -14,28 +12,14 @@ class Elf {
         this.eyePosX = { left: -2.5, right: 2.5 }
         this.scalar = scalar;
         this.animationToPlay = 'walk';
-
-        Elf.elves.push(this);
     }
 
     update() {
         calcElfLimbAngles(this);
         calcElfSelfAngle(this);
-        Dash.checkEndOfDash();
-        elf.move();
-        elf.dash();
-        elf.checkWalls();
-        drawElf(this);
-    }
-
-    getSpeed() {
-        const speedUpgradesAmount = Upgrade.upgrades['speed'].amount;
-        return this.speed + speedUpgradesAmount * 1;
-    }
-
-    getDashSpeed() {
-        const speed = this.getSpeed();
-        return (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
+        this.move();
+        this.dash();
+        this.checkWalls();
     }
 
     move() {
@@ -58,6 +42,16 @@ class Elf {
         this.pos.x = constrain(this.pos.x, 12, width - 12);
     }
 
+    getSpeed() {
+        const speedUpgradesAmount = Upgrade.upgrades['speed'].amount;
+        return this.speed + speedUpgradesAmount * 1;
+    }
+
+    getDashSpeed() {
+        const speed = this.getSpeed();
+        return (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
+    }
+
     // Dash
     static spacePressed() {
         if (Upgrade.upgrades.dash.amount === 0) return
@@ -65,8 +59,9 @@ class Elf {
 
         const effective = Dash.getEffectiveDashCooldown();
         const endFrame = Dash.startFrameCount + effective;
+        const player = game.elves.getPlayer();
 
-        if (!Dash.dashing && frameCount >= endFrame && elf.vel.x !== 0) {
+        if (!Dash.dashing && frameCount >= endFrame && player.vel.x !== 0) {
             Dash.dashing = true;
             Dash.startFrameCount = frameCount;
         }

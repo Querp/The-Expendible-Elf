@@ -1,4 +1,4 @@
-let elf;
+// let elf;
 let bgCnv;
 let cnv;
 let game;
@@ -6,12 +6,14 @@ let game;
 
 function setup() {
     setupDrawingModes();
-    createBackground();
-    Button.createUiButtons();
-    elf = new Elf('player');
     game = {
         presents: new Presents,
+        elves: new Elves,
     }
+    createBackground();
+    Button.createUiButtons();
+    const elf = new Elf('player');
+    game.elves.add(elf);
 }
 
 function draw() {

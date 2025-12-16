@@ -24,7 +24,7 @@ function drawLog() {
         },
         {
             title: 'Spawn Interval',
-            value: `${game.presents.spawnInterval}`
+            value: `${game.presents.spawnInterval.toFixed(2)}`
         },
     ];
 

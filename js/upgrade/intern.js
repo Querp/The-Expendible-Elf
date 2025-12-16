@@ -1,30 +1,28 @@
 class Intern {
-    static interns = [];
-    static lastPlacedIndex;
+    static lastPlacedIndex = 0;
 
-
-    static drawAllInterns() {
-        for (let intern of this.interns) {
-            calcElfLimbAngles(intern);
-            // calcElfSelfAngle(intern);
-            drawElf(intern);
-        }
-    }
     static placeIntern(x) {
-        if (this.interns.length < Upgrade.upgrades.intern.amount) {
-            const intern = new Elf('intern', x, elf.pos.y, 1);
-            this.lastPlacedIndex = this.interns.length;
-            this.interns.push(intern);
-            return
-        } 
+        const internsAllowed = Upgrade.upgrades.intern.amount;
+        const interns = game.elves.elves.filter(e => e.type === 'intern');
 
-        this.lastPlacedIndex = (this.lastPlacedIndex + 1) % (Upgrade.upgrades.intern.amount);
-        this.interns[this.lastPlacedIndex].pos.x = elf.pos.x
+        if (interns.length < internsAllowed) {
+            const player = game.elves.getPlayer();
+            const intern = new Elf('intern', x, player.pos.y, 1);
+            game.elves.add(intern);
+            return;
+        }
+
+        this.lastPlacedIndex = (this.lastPlacedIndex + 1) % interns.length;
+        interns[this.lastPlacedIndex].pos.x = x;
     }
 
     static prepareNextRound() {
-        this.interns = [];
-        Elf.elves = [Elf.elves[0]];
+        game.elves.elves = game.elves.elves.filter(e => e.type === 'player');
+        this.lastPlacedIndex = 0;
     }
 
+    static getInternAmount(){
+        const interns = game.elves.elves.filter(e => e.type === 'intern');
+        return interns.length
+    }
 }

@@ -33,8 +33,6 @@ function drawMenuButton(button) {
 
     // stat value
     const fps = 60;
-    // let dashStat = ;
-    
     let statValue;
     cnv.textSize(25)
 
@@ -46,7 +44,8 @@ function drawMenuButton(button) {
         statValue = `${((Dash.getEffectiveDashCooldown() - Dash.duration) / fps).toFixed(2)}s`;
         if (Upgrade.upgrades.dash.amount === 0) statValue = '';
     }
-    if (button.name === 'speed') statValue = `${elf.speed + Upgrade.upgrades[button.name].amount}vel`;
+    const player = game.elves.getPlayer();
+    if (button.name === 'speed') statValue = `${player.speed + Upgrade.upgrades[button.name].amount}vel`;
     if (button.name === 'health') statValue = `${Upgrade.calcStatValue(button.name)}hp`;
 
     cnv.text(statValue, button.x + 150, button.y)
