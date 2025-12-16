@@ -1,7 +1,7 @@
 class Present {
     static FLOOR_Y_OFFSET = 25;
-    static CATCH_RANGE = 26;
     static CATCH_CHECK_HEIGHT = 70;
+  
 
     static fallSpeed = 1.45;
     static priceWhenCaught = 50;
@@ -66,23 +66,15 @@ class Present {
         if (this.pos.y < height - Present.CATCH_CHECK_HEIGHT) {
             return
         }
-
-        // check if there is elf to catch
-        if (this.isThereElfBelow()) {
-            this.hasBeenCaught = true;
-            this.hasBeenCaughtAtFrameCount = frameCount;
-            game.gameState.balance += Present.priceWhenCaught;
-            // elf.gotHitByPresent(); 
-        }
     }
 
-    isThereElfBelow() {
-        for (let elf of game.elves.elves) {
-            const distance = abs(this.pos.x - elf.pos.x);
-            if (distance < Present.CATCH_RANGE) return true
-        }
-        return false
+    catch() {
+        if (this.hasBeenCaught || this.hasFallenToTheFloor) return 0;
+
+        this.hasBeenCaught = true;
+        this.hasBeenCaughtAtFrameCount = frameCount;
+
+        return Present.priceWhenCaught;
     }
+
 }
-
-

@@ -1,12 +1,10 @@
 TO DO
 
-refactor
-    replace static collections for classes
-    add cooldown class for dash and present with a count down
-    add class setters
-    move catching logic from Present to Elf
 restart dash when present is caught during dash
     allow redirection of dash for a short period of time after catching present
+refactor
+    add cooldown class for dash and present with a count down
+    add class setters
 make debug controls for
     starting / ending round
     presents
@@ -26,6 +24,8 @@ show round timer
 learn callbacks
 make custom input handlers -> one dispatcher, the rest registers
 tests?
+get bonus coins for catching a present at the last moment?
+
 
 
 

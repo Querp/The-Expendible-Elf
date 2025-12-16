@@ -28,7 +28,6 @@ function setup() {
 function draw() {
     cnv.clear();
     game.gameLoop.update();
-    // Game.update();
     image(bgCnv, 0, 0)
     image(cnv, 0, 0)
     drawLog();

@@ -1,4 +1,6 @@
 class Elf {
+    static CATCH_RANGE = 26
+
     constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1) {
         this.type = type;
         this.pos = { x: x, y: y };
@@ -20,6 +22,7 @@ class Elf {
         this.move();
         this.dash();
         this.checkWalls();
+        this.catchPresent();
     }
 
     move() {
@@ -52,6 +55,16 @@ class Elf {
         return (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
     }
 
+    catchPresent() {
+        for (let present of game.presents.presents) {
+            const distance = dist(this.pos.x, this.pos.y, present.pos.x, present.pos.y);
+            if (distance < Elf.CATCH_RANGE && !present.hasFallenToTheFloor) {
+                const value = present.catch();
+                game.gameState.balance += value;
+            }
+        }
+    }
+
     static spacePressed() {
         if (game.upgrades.upgrades.dash.amount === 0) return
         if (!game.gameState.round.hasStarted) return
@@ -65,5 +78,6 @@ class Elf {
             Dash.startFrameCount = frameCount;
         }
     }
+
 
 }
