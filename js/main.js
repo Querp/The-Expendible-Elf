@@ -8,6 +8,7 @@ function setup() {
         elves: new Elves,
         upgrades: new Upgrades,
         buttons: new Buttons,
+        messages: new Messages,
     }
     setupDrawingModes();
     createBackground();

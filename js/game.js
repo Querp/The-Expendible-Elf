@@ -18,7 +18,7 @@ class Game {
             this.calcHealthBar();
             game.buttons.drawMenu();
             this.drawUi();
-            Message.update();
+            game.messages.update();
             return
         }
         
@@ -29,7 +29,7 @@ class Game {
         this.checkEndOfRound();
         this.calcHealthBar();
         this.drawUi();
-        Message.update();
+        game.messages.update();
     }
 
     static checkEndOfRound() {
@@ -102,9 +102,9 @@ class Game {
         if (this.balance >= price) {
             this.balance -= price;
             game.upgrades.upgrades[buttonName].amount++;
-            new Message(`upgrade ${buttonName} bought`, 'success')
+            game.messages.addMessage(`upgrade ${buttonName} bought`, 'success')
         } else {
-            new Message(`not enough $ for ${buttonName}`, 'warning')
+            game.messages.addMessage(`not enough $ for ${buttonName}`, 'warning')
         }
     }
 

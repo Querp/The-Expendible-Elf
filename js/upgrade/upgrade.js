@@ -11,7 +11,7 @@ class Upgrade {
         if (!upgrade) return false;
 
         const isMaxed = upgrade.amount >= upgrade.maxAmount;
-        if (isMaxed) new Message(`"${upgradeName}" is maxed out`, 'warning');
+        if (isMaxed) game.messages.addMessage(`"${upgradeName}" is maxed out`, 'warning');
         return isMaxed;
     }
 
