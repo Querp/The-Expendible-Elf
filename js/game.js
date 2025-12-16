@@ -16,7 +16,7 @@ class Game {
             game.elves.update();
             game.elves.draw();
             this.calcHealthBar();
-            Button.drawMenu();
+            game.buttons.drawMenu();
             this.drawUi();
             Message.update();
             return
@@ -76,7 +76,7 @@ class Game {
     }
 
     static leftMousePressed() {
-        const buttonName = Button.getClickedButtonName();
+        const buttonName = game.buttons.getClickedButtonName();
 
         if (!buttonName || this.round.hasStarted) return
         
@@ -90,7 +90,7 @@ class Game {
 
         // rename 'Unlock Dash'
         if (buttonName === 'dash' && game.upgrades.upgrades.dash.amount === 0) {
-            Button.buttons[1].text = "Upgrade Dash";
+            game.buttons.buttons.dash.text = "Upgrade Dash";
         }
 
         this.buyUpgrade(buttonName)

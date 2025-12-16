@@ -7,12 +7,13 @@ function setup() {
         presents: new Presents,
         elves: new Elves,
         upgrades: new Upgrades,
+        buttons: new Buttons,
     }
     setupDrawingModes();
     createBackground();
-    Button.createUiButtons();
     game.elves.createPlayer(); 
     game.upgrades.createUpgrades(); 
+    game.buttons.createButtons();
 }
 
 function draw() {
