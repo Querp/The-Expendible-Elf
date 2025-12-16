@@ -19,6 +19,7 @@ class Game {
             game.buttons.drawMenu();
             this.drawUi();
             game.messages.update();
+            game.cooldowns.countDown();
             return
         }
         
@@ -30,6 +31,7 @@ class Game {
         this.calcHealthBar();
         this.drawUi();
         game.messages.update();
+        game.cooldowns.countDown();
     }
 
     static checkEndOfRound() {

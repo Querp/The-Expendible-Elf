@@ -21,4 +21,9 @@ class Dash {
         return constrain(reduced, this.duration + this.minReduction, base);
     }
 
+    static test(){
+        console.log('Callback for Dash!');
+        
+    }
+
 }

@@ -9,12 +9,15 @@ function setup() {
         upgrades: new Upgrades,
         buttons: new Buttons,
         messages: new Messages,
+        cooldowns: new Cooldowns,
     }
     setupDrawingModes();
     createBackground();
-    game.elves.createPlayer(); 
-    game.upgrades.createUpgrades(); 
+    game.elves.createPlayer();
+    game.upgrades.createUpgrades();
     game.buttons.createButtons();
+
+    game.cooldowns.addCooldown(100, () => { Dash.test(); });
 }
 
 function draw() {
