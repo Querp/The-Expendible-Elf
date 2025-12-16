@@ -1,12 +1,17 @@
 let elf;
 let bgCnv;
 let cnv;
+let game;
+
 
 function setup() {
     setupDrawingModes();
     createBackground();
     Button.createUiButtons();
     elf = new Elf('player');
+    game = {
+        presents: new Presents,
+    }
 }
 
 function draw() {

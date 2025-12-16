@@ -1,5 +1,5 @@
 let isLogToBeDrawn = false;
-// isLogToBeDrawn = true;
+isLogToBeDrawn = true;
 
 function toggleLog() {
     isLogToBeDrawn = !isLogToBeDrawn
@@ -22,10 +22,10 @@ function drawLog() {
             title: 'Health',
             value: `${Game.health} / ${Upgrade.calcStatValue('health')}`,
         },
-        // {
-        //     title: 0,
-        //     value: 0
-        // },
+        {
+            title: 'Spawn Interval',
+            value: `${game.presents.spawnInterval}`
+        },
     ];
 
     // BG

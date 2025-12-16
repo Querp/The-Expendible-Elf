@@ -8,17 +8,13 @@ class Game {
         hasStarted: false,
         startFrameCount: null,
     };
-    static present = {
-        nextPresentFrame: 0,
-        spawnInterval: 120,
-    }
 
     static update() {
         Intern.drawAllInterns()
 
         if (!this.round.hasStarted) {
-            Present.drawAllPresents();
             // elf.update();
+            game.presents.update();
             drawElf(elf)
             this.calcHealthBar();
             Button.drawMenu();
@@ -28,7 +24,7 @@ class Game {
         }
         
         elf.update();
-        Present.update();
+        game.presents.update();
         this.checkEndOfRound();
         this.calcHealthBar();
         this.drawUi();
@@ -47,7 +43,7 @@ class Game {
     }
 
     static prepareNextRound() {
-        Present.presents = [];
+        game.presents.presents = [];
         this.health = Upgrade.calcHealthStat();
         this.round.startFrameCount = frameCount;
         Dash.startFrameCount = -1000;

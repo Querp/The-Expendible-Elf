@@ -5,6 +5,8 @@ refactor
     add cooldown class for dash and present with a count down
     add class setters
     move catching logic from Present to Elf
+restart dash when present is caught during dash
+    allow redirection of dash for a short period of time after catching present
 make debug controls for
     starting / ending round
     presents
@@ -30,16 +32,17 @@ tests?
 
 
 UPGRADES
-
+                base        upgrade
 health          1000        +100        (250 per present)
 speed           10          +1
 dash            locked      
-    cooldown    270         -50
-    duration    50          +5
-    speed                   
+    cooldown    270         ?
+    duration    50          
+    speed       ?                       
 intern          locked      +1x
 
 edge-portal     (loops the player's x-axis)
+mirror-Elf      
 
 
 
@@ -55,7 +58,3 @@ Health crate    restore 500 hp
 
 BUGS
 fix health bar
-caught presents are marked for deletion but never deleted
-
-
-
