@@ -23,7 +23,6 @@ class Dash {
 
     static test(){
         console.log('Callback for Dash!');
-        
     }
 
 }

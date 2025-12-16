@@ -23,7 +23,7 @@ class Buttons {
 
 
     getClickedButtonName() {
-        if (Game.round.counter === 1) {
+        if (game.gameState.round.counter === 1) {
             if (this.buttons.start.isHovered()) return this.buttons.start.name;
             return null
         }
@@ -35,13 +35,13 @@ class Buttons {
     }
 
     drawMenu() {
-        if (Game.round.counter === 1) {
+        if (game.gameState.round.counter === 1) {
             drawMenuWelcome();
             this.buttons.start.y = height / 2;
             drawMenuButton(this.buttons.start);
             return
         }
-        if (Game.round.counter === 2) {
+        if (game.gameState.round.counter === 2) {
             this.buttons.start.y = height / 2 + 200;
             this.buttons.start.text = 'Continue Game';
         };

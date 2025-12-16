@@ -25,7 +25,7 @@ class Upgrade {
     }
 
     static calcHealthStat() {
-        const base = Game.baseHealth;
+        const base = game.gameState.baseHealth;
         const healthPerUpgrade = 100;
         const upgrades = game.upgrades.upgrades.health.amount;
         return base + upgrades * healthPerUpgrade;

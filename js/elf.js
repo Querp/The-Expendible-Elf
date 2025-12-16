@@ -52,10 +52,9 @@ class Elf {
         return (this.vel.x * 10) * (speed / 5) * (this.scalar * 0.15) * Dash.speed;
     }
 
-    // Dash
     static spacePressed() {
         if (game.upgrades.upgrades.dash.amount === 0) return
-        if (!Game.round.hasStarted) return
+        if (!game.gameState.round.hasStarted) return
 
         const effective = Dash.getEffectiveDashCooldown();
         const endFrame = Dash.startFrameCount + effective;

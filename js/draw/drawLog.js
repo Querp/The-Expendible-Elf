@@ -20,7 +20,7 @@ function drawLog() {
         },
         {
             title: 'Health',
-            value: `${Game.health} / ${Upgrade.calcStatValue('health')}`,
+            value: `${game.gameState.health} / ${Upgrade.calcStatValue('health')}`,
         },
         {
             title: 'Spawn Interval',

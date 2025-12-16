@@ -9,7 +9,7 @@ class Presents {
     }
 
     update() {
-        if (Game.round.hasStarted) {
+        if (game.gameState.round.hasStarted) {
             this.spawn();
             this.updatePresents();
             this.cleanup();
@@ -18,7 +18,7 @@ class Presents {
     }
 
     spawn() {
-        const elapsed = frameCount - Game.round.startFrameCount;
+        const elapsed = frameCount - game.gameState.round.startFrameCount;
         const reduction = elapsed * this.spawnSpeedMultiplier;
         this.spawnInterval = max(this.minSpawnInterval, this.baseSpawnInterval - reduction);
         if (frameCount >= this.nextPresentFrame) {

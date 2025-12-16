@@ -6,18 +6,18 @@ function drawUiBalance() {
 
     cnv.textAlign(LEFT)
     cnv.textSize(30)
-    cnv.text(Game.balance, 80, 100);
+    cnv.text(game.gameState.balance, 80, 100);
 
     cnv.textAlign(CENTER)
 }
 
 function drawUiHealthBar() {
-    // const baseHealth = Game.baseHealth;
+    // const baseHealth = game.gameState.baseHealth;
     // const upgradesAmount = Upgrade.upgrades.health.amount;
     const fullheight = height - 30;
 
     const healthValue = Upgrade.calcStatValue('health');
-    const barHeight = fullheight * (Game.healthBar.height / healthValue)
+    const barHeight = fullheight * (game.gameState.healthBar.height / healthValue)
 
     cnv.push()
     cnv.translate(width, height - 20)

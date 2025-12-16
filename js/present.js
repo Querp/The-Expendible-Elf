@@ -13,7 +13,7 @@ class Present {
     constructor() {
         const rubbleRange = 15;
         let dropHeight = -10;
-        dropHeight = height * 0.8;
+        // dropHeight = height * 0.8;
 
         this.pos = { x: random(width), y: dropHeight };
         this.color = this.getRandomPresentColor();
@@ -57,8 +57,8 @@ class Present {
         // has present hit floor?
         if (this.pos.y === height - Present.FLOOR_Y_OFFSET) {
             this.hasFallenToTheFloor = true;
-            if (!Game.round.hasStarted) return
-            Game.health -= 250
+            if (!game.gameState.round.hasStarted) return
+            game.gameState.health -= 250
             return
         }
 
@@ -71,7 +71,7 @@ class Present {
         if (this.isThereElfBelow()) {
             this.hasBeenCaught = true;
             this.hasBeenCaughtAtFrameCount = frameCount;
-            Game.balance += Present.priceWhenCaught;
+            game.gameState.balance += Present.priceWhenCaught;
             // elf.gotHitByPresent(); 
         }
     }
