@@ -59,10 +59,15 @@ class Elf {
         for (let present of game.presents.presents) {
             const distance = dist(this.pos.x, this.pos.y, present.pos.x, present.pos.y);
             if (distance < Elf.CATCH_RANGE && !present.hasFallenToTheFloor) {
+                this.resetDash();
                 const value = present.catch();
                 game.gameState.balance += value;
             }
         }
+    }
+    resetDash(){
+        if (!Dash.dashing) return
+        Dash.resetCooldown();
     }
 
     static spacePressed() {

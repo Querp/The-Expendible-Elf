@@ -25,4 +25,9 @@ class Dash {
         console.log('Callback for Dash!');
     }
 
+    static resetCooldown(){
+        this.dashing = false;
+        this.startFrameCount = -1000;
+    }
+
 }
