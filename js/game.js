@@ -33,7 +33,7 @@ class Game {
     }
 
     static checkEndOfRound() {
-        const healthUpgrades = Upgrade.upgrades['health'].amount;
+        const healthUpgrades = game.upgrades.upgrades.health.amount;
         const health = this.health + healthUpgrades * 100;
         if (health <= 0) this.endRound();
     }
@@ -65,7 +65,7 @@ class Game {
     }
 
     static calcHealthBar() {
-        const diff = (this.health + Upgrade.upgrades['health'].amount * 100 - this.healthBar.height) * 0.1;
+        const diff = (this.health + game.upgrades.upgrades.health.amount * 100 - this.healthBar.height) * 0.1;
         this.healthBar.height += diff;
     }
 
@@ -89,7 +89,7 @@ class Game {
         if (Upgrade.isUpgradeMaxed(buttonName)) return
 
         // rename 'Unlock Dash'
-        if (buttonName === 'dash' && Upgrade.upgrades.dash.amount === 0) {
+        if (buttonName === 'dash' && game.upgrades.upgrades.dash.amount === 0) {
             Button.buttons[1].text = "Upgrade Dash";
         }
 
@@ -97,11 +97,11 @@ class Game {
     }
 
     static buyUpgrade(buttonName){
-        const price = Upgrade.upgrades[buttonName].price;
+        const price = game.upgrades.upgrades[buttonName].price;
 
         if (this.balance >= price) {
             this.balance -= price;
-            Upgrade.upgrades[buttonName].amount++;
+            game.upgrades.upgrades[buttonName].amount++;
             new Message(`upgrade ${buttonName} bought`, 'success')
         } else {
             new Message(`not enough $ for ${buttonName}`, 'warning')
@@ -109,7 +109,7 @@ class Game {
     }
 
     static downArrowPressed() {
-        if (Upgrade.upgrades.intern.amount > 0 || true) {
+        if (game.upgrades.upgrades.intern.amount > 0 || true) {
             const player = game.elves.getPlayer();
             Intern.placeIntern(player.pos.x);
         }

@@ -3,10 +3,15 @@ class Elves {
         this.elves = [];
     }
 
+    createPlayer() {
+        const player = new Elf('player');
+        this.add(player);
+        return player
+    }
+
     add(elf) {
         this.elves.push(elf);
     }
-
 
     update() {
         Dash.checkEndOfDash();
@@ -26,5 +31,6 @@ class Elves {
     getPlayer() {
         return this.elves.find(e => e.type === 'player');
     }
+
 
 }

@@ -32,7 +32,7 @@ function drawUiHealthBar() {
 
 
 function drawUiInternIcons() {
-    const target = Upgrade.upgrades.intern.amount - Intern.getInternAmount();
+    const target = game.upgrades.upgrades.intern.amount - Intern.getInternAmount();
     for (let i = 0; i < target; i++) {
         const x = 75 + i * 32;
         const y = 140;

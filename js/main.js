@@ -1,19 +1,18 @@
-// let elf;
 let bgCnv;
 let cnv;
 let game;
 
-
 function setup() {
-    setupDrawingModes();
     game = {
         presents: new Presents,
         elves: new Elves,
+        upgrades: new Upgrades,
     }
+    setupDrawingModes();
     createBackground();
     Button.createUiButtons();
-    const elf = new Elf('player');
-    game.elves.add(elf);
+    game.elves.createPlayer(); 
+    game.upgrades.createUpgrades(); 
 }
 
 function draw() {

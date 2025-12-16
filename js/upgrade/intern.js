@@ -2,7 +2,7 @@ class Intern {
     static lastPlacedIndex = 0;
 
     static placeIntern(x) {
-        const internsAllowed = Upgrade.upgrades.intern.amount;
+        const internsAllowed = game.upgrades.upgrades.intern.amount;
         const interns = game.elves.elves.filter(e => e.type === 'intern');
 
         if (interns.length < internsAllowed) {

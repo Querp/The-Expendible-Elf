@@ -21,13 +21,13 @@ function drawMenuButton(button) {
     cnv.text(button.text, button.x, button.y - 8)
 
     // cost
-    const price = `$ ${Upgrade.upgrades[button.name].price}`;
+    const price = `$ ${game.upgrades.upgrades[button.name].price}`;
     cnv.textSize(15)
     cnv.text(price, button.x, button.y + 15)
 
     // amount
-    const amount = Upgrade.upgrades[button.name].amount;
-    const max = Upgrade.upgrades[button.name].max;
+    const amount = game.upgrades.upgrades[button.name].amount;
+    const max = game.upgrades.upgrades[button.name].maxAmount;
     cnv.textSize(25)
     cnv.text(`${amount} / ${max}`, button.x - 150, button.y)
 
@@ -37,15 +37,15 @@ function drawMenuButton(button) {
     cnv.textSize(25)
 
     if (button.name === 'intern') {
-        statValue = `${Upgrade.upgrades[button.name].amount}x`;
-        if (Upgrade.upgrades.intern.amount === 0) statValue = '';
+        statValue = `${game.upgrades.upgrades[button.name].amount}x`;
+        if (game.upgrades.upgrades.intern.amount === 0) statValue = '';
     }
     if (button.name === 'dash') {
         statValue = `${((Dash.getEffectiveDashCooldown() - Dash.duration) / fps).toFixed(2)}s`;
-        if (Upgrade.upgrades.dash.amount === 0) statValue = '';
+        if (game.upgrades.upgrades.dash.amount === 0) statValue = '';
     }
     const player = game.elves.getPlayer();
-    if (button.name === 'speed') statValue = `${player.speed + Upgrade.upgrades[button.name].amount}vel`;
+    if (button.name === 'speed') statValue = `${player.speed + game.upgrades.upgrades[button.name].amount}vel`;
     if (button.name === 'health') statValue = `${Upgrade.calcStatValue(button.name)}hp`;
 
     cnv.text(statValue, button.x + 150, button.y)
