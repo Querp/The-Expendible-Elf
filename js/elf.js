@@ -19,21 +19,30 @@ class Elf {
     update() {
         calcElfLimbAngles(this);
         calcElfSelfAngle(this);
-        this.move();
-        this.dash();
-        this.checkWalls();
+        if (this.type === 'player') {
+            this.move();
+            this.dash();
+            this.checkWalls();
+        }
         this.catchPresent();
     }
 
     move() {
         if (Dash.dashing) return
         const speed = this.getSpeed();
-        this.updateVel();
         this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
     }
 
-    updateVel() {
-        this.vel.x = keyIsDown(LEFT_ARROW) ? -1 : keyIsDown(RIGHT_ARROW) ? 1 : 0;
+    updateVel(direction) {
+        if (Dash.isDashBlockingInput) return
+        
+        if (Dash.dashing) {
+            if (direction === 'left') this.vel.x = -1;
+            if (direction === 'right') this.vel.x = 1;
+            Dash.isDashBlockingInput = true
+        } else {
+            this.vel.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
+        }
     }
 
     dash() {
@@ -63,16 +72,18 @@ class Elf {
         for (let present of game.presents.presents) {
             const distance = dist(this.pos.x, this.pos.y, present.pos.x, present.pos.y);
             if (distance < Elf.CATCH_RANGE && !present.hasFallenToTheFloor) {
-                this.resetDash();
+                this.dashCombo();
                 const value = present.catch();
                 game.gameState.balance += value;
             }
         }
     }
-    resetDash() {
+
+    dashCombo() {
         if (!Dash.dashing) return
-        // redirect dash 
-        this.updateVel();
+
+        // allow redirection of dash for 1 frame
+        Dash.isDashBlockingInput = false;
         Dash.resetCooldown();
     }
 
@@ -86,6 +97,7 @@ class Elf {
 
         if (!Dash.dashing && frameCount >= endFrame && player.vel.x !== 0) {
             Dash.dashing = true;
+            Dash.isDashBlockingInput = true;
             Dash.startFrameCount = frameCount;
         }
     }

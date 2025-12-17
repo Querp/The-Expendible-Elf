@@ -4,6 +4,7 @@ class Dash {
     static startFrameCount = -1000;
     static cooldownDuration = 270;
     static speed = 1;
+    static isDashBlockingInput = false;
 
     static reductionPerUpgrade = 50
     static minReduction = 10;
@@ -12,6 +13,7 @@ class Dash {
     static checkEndOfDash() {
         if (frameCount - this.startFrameCount >= this.duration) {
             this.dashing = false;
+            this.isDashBlockingInput = false;
         }
     }
 

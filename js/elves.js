@@ -17,7 +17,7 @@ class Elves {
         Dash.checkEndOfDash();
 
         for (const elf of this.elves) {
-            if (elf.type === 'player') elf.update();
+            elf.update();
         }
     }
 

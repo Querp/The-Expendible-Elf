@@ -1,4 +1,11 @@
-class GameInput {
+class Input {
+
+    constructor(name, keyCode, action = 'press') {
+    this.name = name;
+    this.keyCode = keyCode;
+    this.action = action; // 'press' | 'down'
+  }
+
     static handleButtonClick(buttonName, state, loop) {
         if (!buttonName || state.round.hasStarted) return;
 
@@ -18,19 +25,4 @@ class GameInput {
         loop.buyUpgrade(buttonName);
     }
 
-    static handleDownArrow() {
-        const player = game.elves.getPlayer();
-        Intern.placeIntern(player.pos.x);
-    }
-
-    static handleEnter(state, loop) {
-        if (!state.round.hasStarted) {
-            state.round.hasStarted = true;
-            loop.prepareNextRound();
-        }
-    }
-
-    static handleSpace() {
-        Elf.spacePressed()
-    }
 }

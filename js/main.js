@@ -14,7 +14,8 @@ function setup() {
         messages: new Messages,
         cooldowns: new Cooldowns,
         gameState: gameState,
-        gameLoop: gameLoop
+        gameLoop: gameLoop,
+        inputs: new Inputs
     }
 
     setupDrawingModes();
@@ -23,10 +24,12 @@ function setup() {
     game.elves.createPlayer();
     game.upgrades.createUpgrades();
     game.buttons.createButtons();
+    game.inputs.setup();
 }
 
 function draw() {
     cnv.clear();
+    game.inputs.update();
     game.gameLoop.update();
     image(bgCnv, 0, 0)
     image(cnv, 0, 0)
@@ -36,11 +39,7 @@ function draw() {
 
 
 function keyPressed() {
-    if (key === ' ') GameInput.handleSpace();
-    if (keyCode === ENTER) GameInput.handleEnter(game.gameState, game.gameLoop);
-    if (keyCode === DOWN_ARROW) GameInput.handleDownArrow();
-    if (keyCode === TAB) toggleLog();
-    return false;
+    game.inputs.onKeyPressed();
 }
 
 function mousePressed() {
@@ -48,6 +47,6 @@ function mousePressed() {
         const buttonName = game.buttons.getClickedButtonName();
         if (!buttonName) return;
 
-        GameInput.handleButtonClick(buttonName, game.gameState, game.gameLoop);
+        Input.handleButtonClick(buttonName, game.gameState, game.gameLoop);
     }
 }

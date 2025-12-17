@@ -5,6 +5,7 @@ class GameLoop {
 
     update() {
         const upgrades = game.upgrades.upgrades;
+        this.handleInput();
 
         // Pre-round
         if (!this.state.round.hasStarted) {
@@ -29,6 +30,24 @@ class GameLoop {
         this.drawUi();
         game.messages.update();
         game.cooldowns.countDown();
+    }
+
+    handleInput() {
+        const inputs = game.inputs;
+        const player = game.elves.getPlayer();
+
+        if (inputs.isDown('LEFT')) player.updateVel('left');
+        else if (inputs.isDown('RIGHT')) player.updateVel('right');
+        else player.updateVel(null);
+
+        if (inputs.consume('DOWN')) Intern.placeIntern(player.pos.x);
+
+        if (inputs.consume('SPACE')) Elf.spacePressed();
+
+        if (inputs.consume('ENTER') && !this.state.round.hasStarted) {
+            this.state.round.hasStarted = true;
+            this.prepareNextRound();
+        }
     }
 
     checkEndOfRound() {
@@ -70,6 +89,7 @@ class GameLoop {
             game.messages.addMessage(`Not enough $ for ${upgradeName}`, 'warning');
         }
     }
+
 }
 
 
