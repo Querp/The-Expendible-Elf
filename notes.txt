@@ -1,7 +1,7 @@
 TO DO
 
-restart dash when present is caught during dash
-    allow redirection of dash for a short period of time after catching present
+add start screen
+
 refactor
     add cooldown class for dash and present with a count down
     add class setters
@@ -16,10 +16,9 @@ make debug controls for
 interns
     unique colors
     animate 
-start screen
 menu keyboard navigation
 add pickups (in-round upgrades, not permanent)
-show round timer
+
 
 learn callbacks
 make custom input handlers -> one dispatcher, the rest registers

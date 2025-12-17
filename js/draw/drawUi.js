@@ -48,3 +48,33 @@ function drawUiInternIcons() {
             x + 6.3, y + 8,);
     }
 }
+
+function drawUiRoundCounter() {
+    const minutes = getRoundCounterValue('minutes');
+    const seconds = getRoundCounterValue('seconds');
+    cnv.textSize(30);
+    cnv.fill('#ddd');
+    cnv.text(minutes, width / 2 - 22, 55);
+    cnv.text(seconds, width / 2 + 22, 55);
+    cnv.text(':', width / 2, 53);
+}
+
+function getRoundCounterValue(type) {
+    const roundStartFrame = game.gameState.round.startFrameCount;
+    let elapsedFrames = frameCount - roundStartFrame;
+    if (!game.gameState.round.hasStarted) {
+        elapsedFrames = game.gameState.round.endFrameCount - roundStartFrame
+    }
+    const fps = 60;
+    const elapsedSeconds = floor(elapsedFrames / fps);
+    // const elapsedSeconds = elapsedFrames * 3;
+
+    const seconds = elapsedSeconds % 60;
+    const minutes = ((elapsedSeconds % (60 * 60)) - seconds) / 60;
+
+    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
+    const minutesDisplay = minutes < 10 ? `0${minutes}` : minutes;
+
+    if (type === 'seconds') return secondsDisplay
+    if (type === 'minutes') return minutesDisplay
+}

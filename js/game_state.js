@@ -9,6 +9,7 @@ class GameState {
             counter: 1,
             hasStarted: false,
             startFrameCount: null,
+            endFrameCount: null,
         };
     }
 

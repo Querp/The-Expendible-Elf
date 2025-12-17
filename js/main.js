@@ -46,7 +46,6 @@ function mousePressed() {
     if (mouseButton === LEFT) {
         const buttonName = game.buttons.getClickedButtonName();
         if (!buttonName) return;
-
         Input.handleButtonClick(buttonName, game.gameState, game.gameLoop);
     }
 }

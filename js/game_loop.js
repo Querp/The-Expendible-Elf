@@ -6,7 +6,7 @@ class GameLoop {
     update() {
         const upgrades = game.upgrades.upgrades;
         this.handleInput();
-
+        
         // Pre-round
         if (!this.state.round.hasStarted) {
             game.presents.update();
@@ -24,10 +24,11 @@ class GameLoop {
         game.presents.update();
         game.elves.update();
         game.elves.draw();
-
+        
         this.checkEndOfRound();
         this.state.calcHealthBar(upgrades.health.amount);
         this.drawUi();
+        
         game.messages.update();
         game.cooldowns.countDown();
     }
@@ -59,6 +60,7 @@ class GameLoop {
     endRound() {
         this.state.round.hasStarted = false;
         this.state.round.counter++;
+        this.state.round.endFrameCount = frameCount;
     }
 
     prepareNextRound() {
@@ -72,6 +74,7 @@ class GameLoop {
     drawUi() {
         if (!this.state.round.hasStarted && this.state.round.counter === 1) return;
         drawUiBalance();
+        drawUiRoundCounter();
         if (!this.state.round.hasStarted) return;
         drawUiHealthBar();
         drawUiInternIcons();
@@ -91,6 +94,3 @@ class GameLoop {
     }
 
 }
-
-
-

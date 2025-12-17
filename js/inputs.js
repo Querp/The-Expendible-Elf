@@ -17,8 +17,6 @@ class Inputs {
             this.inputs[def.name] = def;
             this.state[def.name] = false;
         }
-        console.log(this.state);
-
     }
 
     update() {
