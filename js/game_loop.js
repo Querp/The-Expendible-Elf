@@ -17,6 +17,7 @@ class GameLoop {
             this.drawUi();
             game.messages.update();
             game.cooldowns.countDown();
+            drawLog();
             return;
         }
 
@@ -24,13 +25,12 @@ class GameLoop {
         game.elves.update();
         game.elves.draw();
         game.presents.update();
-        
         this.checkEndOfRound();
         this.state.calcHealthBar(upgrades.health.amount);
         this.drawUi();
-        
         game.messages.update();
         game.cooldowns.countDown();
+        drawLog();
     }
 
     handleInput() {

@@ -1,6 +1,11 @@
 let bgCnv;
 let cnv;
 let game;
+let iconsImg;
+
+function preload() {
+    iconsImg = loadImage('img/upgrade-icons.webp');
+}
 
 function setup() {
     const gameState = new GameState();
@@ -33,14 +38,13 @@ function draw() {
     game.gameLoop.update();
     image(bgCnv, 0, 0)
     image(cnv, 0, 0)
-    drawLog();
 }
 
 
 
 function keyPressed() {
     game.inputs.onKeyPressed();
-    
+
     if (keyCode === TAB) return false;
 }
 

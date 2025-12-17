@@ -7,8 +7,8 @@ class Upgrades {
         const upgradeList = [
             new Upgrade('health', 0, 100, 100),
             new Upgrade('speed', 0, 250, 20),
-            new Upgrade('dash', 1, 600, 5),
-            new Upgrade('intern', 5, 1000, 5)
+            new Upgrade('dash', 0, 600, 5),
+            new Upgrade('intern', 0, 1000, 5)
         ];
 
         for (const upgrade of upgradeList) {

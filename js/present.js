@@ -1,7 +1,6 @@
 class Present {
     static FLOOR_Y_OFFSET = 25;
     static CATCH_CHECK_HEIGHT = 70;
-  
 
     static fallSpeed = 1.45;
     static priceWhenCaught = 50;
@@ -13,7 +12,7 @@ class Present {
     constructor() {
         const rubbleRange = 15;
         let dropHeight = -10;
-        dropHeight = height * 0.35;
+        // dropHeight = height * 0.98;
 
         this.pos = { x: random(width), y: dropHeight };
         this.color = this.getRandomPresentColor();

@@ -6,21 +6,20 @@ class Buttons {
     createButtons() {
         const centerX = width / 2;
         const centerY = height / 2;
-        const w = 500;
-        const h = 100;
+        const w = 250;
+        const h = 260;
         const buttons = [
-            new Button('intern', 'Hire Intern', centerX, centerY - h * 2, w, h),
-            new Button('dash', 'Unlock Dash', centerX, centerY - h, w, h),
-            new Button('speed', 'Speed', centerX, centerY, w, h),
-            new Button('health', 'Health', centerX, centerY + h, w, h),
-            new Button('start', 'Start Game', centerX, centerY + h * 2, w, h),
+            new Button('health', 'Health', centerX - w / 2, centerY - 195, w, h),
+            new Button('speed', 'Speed', centerX + w / 2, centerY - 195, w, h),
+            new Button('dash', 'Unlock Dash', centerX - w / 2, centerY + 65, w, h),
+            new Button('intern', 'Intern', centerX + w / 2, centerY + 65, w, h),
+            new Button('start', 'Start Game', centerX, centerY, w*2, 100),
         ];
 
         for (const button of buttons) {
             this.buttons[button.name] = button;
         }
     }
-
 
     getClickedButtonName() {
         if (game.gameState.round.counter === 1) {
@@ -42,7 +41,7 @@ class Buttons {
             return
         }
         if (game.gameState.round.counter === 2) {
-            this.buttons.start.y = height / 2 + 200;
+            this.buttons.start.y = height / 2 + 250;
             this.buttons.start.text = 'Continue Game';
         };
 

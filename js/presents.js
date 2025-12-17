@@ -2,6 +2,7 @@ class Presents {
     constructor() {
         this.presents = [];
         this.baseSpawnInterval = 120;
+        // this.baseSpawnInterval = 30;
         this.spawnInterval = this.baseSpawnInterval;
         this.spawnSpeedMultiplier = 0.01;
         this.minSpawnInterval = 30;
