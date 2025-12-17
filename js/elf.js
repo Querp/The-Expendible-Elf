@@ -35,7 +35,7 @@ class Elf {
 
     updateVel(direction) {
         if (Dash.isDashBlockingInput) return
-        
+
         if (Dash.dashing) {
             if (direction === 'left') this.vel.x = -1;
             if (direction === 'right') this.vel.x = 1;
@@ -51,11 +51,17 @@ class Elf {
     }
 
     checkWalls() {
-        if (this.pos.x < 12 || this.pos.x > width - 12) {
-            this.vel.x = 0;
-            Dash.dashing = false;
+        const wallOffset = 12;
+        if (!Dash.dashing) {
+            if (this.pos.x < wallOffset || this.pos.x > width - wallOffset) {
+                this.vel.x = 0;
+            }
+            this.pos.x = constrain(this.pos.x, wallOffset, width - wallOffset);
+            return
         }
-        this.pos.x = constrain(this.pos.x, 12, width - 12);
+        // loop player to other side of screen
+        if (this.pos.x < 0) this.pos.x = width;
+        if (this.pos.x > width) this.pos.x = 0;
     }
 
     getSpeed() {

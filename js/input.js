@@ -19,7 +19,7 @@ class Input {
 
         // Rename dash button if first purchase
         if (buttonName === 'dash' && game.upgrades.upgrades.dash.amount === 0) {
-            game.buttons.buttons.dash.text = "Upgrade Dash Cooldown";
+            game.buttons.buttons.dash.text = "Dash Cooldown";
         }
 
         loop.buyUpgrade(buttonName);
