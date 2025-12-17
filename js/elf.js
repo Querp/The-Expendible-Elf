@@ -14,6 +14,15 @@ class Elf {
         this.eyePosX = { left: -2.5, right: 2.5 }
         this.scalar = scalar;
         this.animationToPlay = 'walk';
+        this.height = 55; // at scale 1.0
+        this.radius = 15;
+        this.placeElfAtFloor();
+    }
+
+    placeElfAtFloor(){
+        const FLOOR_Y = height - 20;
+        const elfHeight = this.height * this.scalar;
+        this.pos.y = FLOOR_Y - elfHeight / 2;
     }
 
     update() {
@@ -77,7 +86,8 @@ class Elf {
     catchPresent() {
         for (let present of game.presents.presents) {
             const distance = dist(this.pos.x, this.pos.y, present.pos.x, present.pos.y);
-            if (distance < Elf.CATCH_RANGE && !present.hasFallenToTheFloor) {
+            const minDistance = present.radius + this.radius * this.scalar;
+            if (distance < minDistance && !present.hasFallenToTheFloor) {
                 this.dashCombo();
                 const value = present.catch();
                 game.gameState.balance += value;
@@ -87,6 +97,7 @@ class Elf {
 
     dashCombo() {
         if (!Dash.dashing) return
+        if (this.type !== 'player') return
 
         // allow redirection of dash for 1 frame
         Dash.isDashBlockingInput = false;

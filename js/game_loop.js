@@ -9,9 +9,9 @@ class GameLoop {
         
         // Pre-round
         if (!this.state.round.hasStarted) {
-            game.presents.update();
             // game.elves.update();
             game.elves.draw();
+            game.presents.update();
             this.state.calcHealthBar(upgrades.health.amount);
             game.buttons.drawMenu();
             this.drawUi();
@@ -21,9 +21,9 @@ class GameLoop {
         }
 
         // Round active
-        game.presents.update();
         game.elves.update();
         game.elves.draw();
+        game.presents.update();
         
         this.checkEndOfRound();
         this.state.calcHealthBar(upgrades.health.amount);
@@ -44,6 +44,8 @@ class GameLoop {
         if (inputs.consume('DOWN')) Intern.placeIntern(player.pos.x);
 
         if (inputs.consume('SPACE')) Elf.spacePressed();
+
+        if (inputs.consume('TAB')) game.gameState.ui.showLog = !game.gameState.ui.showLog;
 
         if (inputs.consume('ENTER') && !this.state.round.hasStarted) {
             this.state.round.hasStarted = true;
@@ -69,6 +71,7 @@ class GameLoop {
         this.state.round.startFrameCount = frameCount;
         Dash.startFrameCount = -1000;
         Intern.prepareNextRound();
+        game.elves.resetPlayerPosition();
     }
 
     drawUi() {

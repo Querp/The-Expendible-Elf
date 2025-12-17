@@ -1,13 +1,5 @@
-let isLogToBeDrawn = false;
-// isLogToBeDrawn = true;
-
-function toggleLog() {
-    isLogToBeDrawn = !isLogToBeDrawn
-    return false
-}
-
 function drawLog() {
-    if (!isLogToBeDrawn) return;
+    if (!game.gameState.ui.showLog) return;
 
     const effective = Dash.getEffectiveDashCooldown();
     const endFrame = Dash.startFrameCount + effective;

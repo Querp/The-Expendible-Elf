@@ -11,6 +11,7 @@ class Inputs {
             new Input('DOWN', DOWN_ARROW, 'press'),
             new Input('ENTER', ENTER, 'press'),
             new Input('SPACE', 32, 'press'),
+            new Input('TAB', 9, 'press'),
         ];
 
         for (const def of defs) {

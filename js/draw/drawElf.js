@@ -2,10 +2,13 @@ function drawElf(elf) {
     cnv.push();
     cnv.translate(elf.pos.x, elf.pos.y);
     cnv.scale(elf.scalar, elf.scalar);
-    cnv.rotate(radians(elf.angle.self));
     cnv.stroke(0);
     cnv.strokeWeight(0.2)
     cnv.noStroke();
+
+    if (elf.type === 'player') drawElfDashCoolDown();
+
+    cnv.rotate(radians(elf.angle.self));
 
     drawElfHead(elf);
 
@@ -29,9 +32,14 @@ function drawElf(elf) {
         drawElfArmRight(elf);
     }
 
-    cnv.rotate(radians(-elf.angle.self));
+    cnv.fill('#ffffff25')
 
-    if (elf.type === 'player') drawElfDashCoolDown();
+    // debug radius 
+    cnv.circle(0,0,30);
+    
+    // debug height 
+    // cnv.rect(0,0,30,55);
+
     cnv.pop();
 }
 
@@ -60,15 +68,15 @@ function drawElfHead(elf) {
     cnv.noStroke();
     cnv.fill('#388e3fff');
     if (elf.type === 'intern') cnv.fill('hsla(282, 43%, 39%, 1.00)')
-        cnv.triangle(
-    -6.3, -12,
-    0, -28,
-    6.3, -12,
-);
+    cnv.triangle(
+        -6.3, -12,
+        0, -28,
+        6.3, -12,
+    );
 
-cnv.fill('#c72b2bff');
-if (elf.type === 'intern') cnv.fill('hsla(0, 0%, 84%, 1.00)')
-cnv.rect(0, -12, 13, 1.5, 0.2);
+    cnv.fill('#c72b2bff');
+    if (elf.type === 'intern') cnv.fill('hsla(0, 0%, 84%, 1.00)')
+    cnv.rect(0, -12, 13, 1.5, 0.2);
 }
 
 function drawElfChest(elf) {
@@ -145,13 +153,28 @@ function drawElfLegRight(elf) {
 }
 
 function drawElfDashCoolDown() {
-    const effective = Dash.getEffectiveDashCooldown();
-    const passed = frameCount - Dash.startFrameCount;
-    const maxW = 40;
-    const w = map(passed, 0, effective, maxW, 0, true); // true = clamp
-
+    if (Dash.dashing) return
+    const maxW = 30;
+    const w = calcDashCooldownBarWidth(maxW);
+    const h = 5;
+    const y = -35
     cnv.rectMode(CORNER);
-    cnv.fill('#ffffffa6');
-    cnv.rect(-maxW / 2, -30, w, 5.5);
+    if (w > 0) {
+        cnv.fill('#0000006b');
+        cnv.strokeWeight(1)
+        cnv.stroke('#ddd')
+        cnv.rect(-maxW / 2, y, maxW, h);
+    }
+    cnv.fill('#ffffffa7');
+    cnv.rect(-maxW / 2, y, w, h);
     cnv.rectMode(CENTER);
+}
+
+function calcDashCooldownBarWidth(maxW) {
+    const effective = Dash.getEffectiveDashCooldown();
+    const cooldownStart = Dash.startFrameCount + Dash.duration;
+    const cooldownLength = effective - Dash.duration;
+    const passed = frameCount - cooldownStart;
+    const remaining = max(cooldownLength - passed, 0);
+    return map(remaining, 0, cooldownLength, 0, maxW, true);
 }

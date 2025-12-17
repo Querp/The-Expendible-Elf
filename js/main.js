@@ -40,6 +40,8 @@ function draw() {
 
 function keyPressed() {
     game.inputs.onKeyPressed();
+    
+    if (keyCode === TAB) return false;
 }
 
 function mousePressed() {

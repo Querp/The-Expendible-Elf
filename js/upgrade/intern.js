@@ -7,7 +7,7 @@ class Intern {
 
         if (interns.length < internsAllowed) {
             const player = game.elves.getPlayer();
-            const intern = new Elf('intern', x, player.pos.y, 1);
+            const intern = new Elf('intern', x, player.pos.y, 2.5);
             game.elves.add(intern);
             return;
         }

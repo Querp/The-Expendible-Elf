@@ -22,6 +22,7 @@ class Present {
         this.hasFallenToTheFloor = false;
         this.rubblePositions = [random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange)];
         this.markedForDeletion = false;
+        this.radius = 10;
     }
 
     getRandomPresentColor() {

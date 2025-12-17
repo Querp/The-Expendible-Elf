@@ -11,6 +11,9 @@ class GameState {
             startFrameCount: null,
             endFrameCount: null,
         };
+        this.ui = {
+            showLog: false,
+        }
     }
 
     changeHealth(amount) {

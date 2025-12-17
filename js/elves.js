@@ -4,6 +4,7 @@ class Elves {
     }
 
     createPlayer() {
+        // const player = new Elf('player', 140, height, 1);
         const player = new Elf('player');
         this.add(player);
         return player
@@ -32,5 +33,8 @@ class Elves {
         return this.elves.find(e => e.type === 'player');
     }
 
+    resetPlayerPosition() {
+        this.getPlayer().pos.x = width / 2;
+    }
 
 }
