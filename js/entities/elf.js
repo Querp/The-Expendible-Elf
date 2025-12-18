@@ -1,7 +1,7 @@
 class Elf {
     static CATCH_RANGE = 26
 
-    constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1) {
+    constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1, color = '#388e3fff') {
         this.type = type;
         this.pos = { x: x, y: y };
         this.vel = { x: 0, y: 0 };
@@ -16,6 +16,7 @@ class Elf {
         this.animationToPlay = 'walk';
         this.height = 55; // at scale 1.0
         this.radius = 15;
+        this.color = color;
         this.placeElfAtFloor();
     }
 

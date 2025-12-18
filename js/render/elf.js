@@ -66,8 +66,7 @@ function drawElfHead(elf) {
     cnv.circle(elf.eyePosX.right, -8, constrain((2.3 - elf.vel.x * 0.75), 0, 2.3));
 
     cnv.noStroke();
-    cnv.fill('#388e3fff');
-    if (elf.type === 'intern') cnv.fill('hsla(282, 43%, 39%, 1.00)')
+    cnv.fill(elf.color);
     cnv.triangle(
         -6.3, -12,
         0, -28,
@@ -81,8 +80,7 @@ function drawElfHead(elf) {
 
 function drawElfChest(elf) {
     const chestWidth = elf.vel.x === 0 ? 10.5 : 6;
-    cnv.fill('#388e3fff');
-    if (elf.type === 'intern') cnv.fill('hsla(282, 43%, 39%, 1.00)')
+    cnv.fill(elf.color);
     cnv.rect(0, 5.5, chestWidth, 14, 3);
 }
 
@@ -117,7 +115,7 @@ function drawElfLegLeft(elf) {
     cnv.translate(xOffset, 11.45);
 
     cnv.fill('#ff0000ff');
-    if (elf.type === 'intern') cnv.fill('hsla(282, 43%, 39%, 1.00)')
+    if (elf.type === 'intern') cnv.fill(elf.color);
     cnv.rotate(radians(elf.angle.leg.left));
     cnv.rect(0, 7, 1.8, 16, 99);
 
@@ -135,10 +133,10 @@ function drawElfLegRight(elf) {
     const xOffset = elf.vel.x !== 0 ? 0 : -3;
     const shoeWidth = elf.vel.x !== 0 ? 5 : 3;
     cnv.push();
-    cnv.translate(xOffset, 11.45)
+    cnv.translate(xOffset, 11.45);
 
     cnv.fill('#00ff00ff');
-    if (elf.type === 'intern') cnv.fill('hsla(282, 43%, 39%, 1.00)')
+    if (elf.type === 'intern') cnv.fill(elf.color);
     cnv.rotate(radians(elf.angle.leg.right));
     cnv.rect(0, 7, 1.8, 16, 99);
 

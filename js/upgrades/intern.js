@@ -1,5 +1,12 @@
 class Intern {
     static lastPlacedIndex = 0;
+    static internColors = [
+        'hsla(282, 43%, 39%, 1.00)',
+        'hsla(52, 43%, 39%, 1.00)',
+        'hsla(0, 43%, 39%, 1.00)',
+        'hsla(171, 43%, 39%, 1.00)',
+        'hsla(244, 43%, 39%, 1.00)',
+    ]
 
     static placeIntern(x) {
         const internsAllowed = game.upgrades.upgrades.intern.amount;
@@ -12,7 +19,8 @@ class Intern {
 
         if (interns.length < internsAllowed) {
             const player = game.elves.getPlayer();
-            const intern = new Elf('intern', x, player.pos.y, 2.5);
+            const color = this.internColors[interns.length];
+            const intern = new Elf('intern', x, player.pos.y, 2.5, color);
             game.elves.add(intern);
             return;
         }
