@@ -1,9 +1,6 @@
 # Private local notes
 notes.txt
 
-# Private debug settings
-js/systems/debugSettings.js
-
 # Logs
 logs
 *.log
