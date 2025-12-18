@@ -105,7 +105,10 @@ class Elf {
     }
 
     static spacePressed() {
-        if (game.upgrades.upgrades.dash.amount === 0) return
+        if (game.upgrades.upgrades.dash.amount === 0) {
+            game.messages.addMessage('🐱‍🏍 Dash is not available', 'warning');
+            return
+        }
         if (!game.gameState.round.hasStarted) return
 
         const effective = Dash.getEffectiveDashCooldown();

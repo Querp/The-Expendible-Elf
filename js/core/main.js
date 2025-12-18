@@ -25,7 +25,6 @@ function setup() {
 
     setupDrawingModes();
     createBackground();
-
     game.elves.createPlayer();
     game.upgrades.createUpgrades();
     game.buttons.createButtons();
@@ -44,7 +43,6 @@ function draw() {
 
 function keyPressed() {
     game.inputs.onKeyPressed();
-
     if (keyCode === TAB) return false;
 }
 

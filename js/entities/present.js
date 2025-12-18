@@ -2,7 +2,8 @@ class Present {
     static FLOOR_Y_OFFSET = 25;
     static CATCH_CHECK_HEIGHT = 70;
 
-    static fallSpeed = 1.45;
+    // static fallSpeed = 1.45;
+    static fallSpeed = 100;
     static priceWhenCaught = 50;
     static timeToDespawn = 150;
     static colorHues = { pink: 325, blue: 210, green: 107, yellow: 48 };

@@ -3,6 +3,11 @@ class Intern {
 
     static placeIntern(x) {
         const internsAllowed = game.upgrades.upgrades.intern.amount;
+        if (internsAllowed === 0) {
+            game.messages.addMessage('🎅 No interns available', 'warning');
+            return
+        };
+        
         const interns = game.elves.elves.filter(e => e.type === 'intern');
 
         if (interns.length < internsAllowed) {

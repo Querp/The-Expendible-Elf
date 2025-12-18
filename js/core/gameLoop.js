@@ -6,10 +6,10 @@ class GameLoop {
     update() {
         const upgrades = game.upgrades.upgrades;
         this.handleInput();
-        
+
         // Pre-round
         if (!this.state.round.hasStarted) {
-            // game.elves.update();
+            game.elves.update();
             game.elves.draw();
             game.presents.update();
             this.state.calcHealthBar(upgrades.health.amount);
@@ -71,7 +71,7 @@ class GameLoop {
         this.state.round.startFrameCount = frameCount;
         Dash.startFrameCount = -1000;
         Intern.prepareNextRound();
-        game.elves.resetPlayerPosition();
+        // game.elves.resetPlayerPosition();
     }
 
     drawUi() {
