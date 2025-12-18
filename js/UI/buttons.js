@@ -41,6 +41,7 @@ class Buttons {
             return
         }
         if (game.gameState.round.counter === 2) {
+            
             this.buttons.start.y = height / 2 + 250;
             this.buttons.start.text = 'Continue Game';
         };

@@ -37,9 +37,9 @@ class GameLoop {
         const inputs = game.inputs;
         const player = game.elves.getPlayer();
 
-        if (inputs.isDown('LEFT')) player.updateVel('left');
-        else if (inputs.isDown('RIGHT')) player.updateVel('right');
-        else player.updateVel(null);
+        if (inputs.isDown('LEFT')) player.updateAcceleration('left');
+        else if (inputs.isDown('RIGHT')) player.updateAcceleration('right');
+        else player.updateAcceleration(null);
 
         if (inputs.consume('DOWN')) Intern.placeIntern(player.pos.x);
 
@@ -71,6 +71,9 @@ class GameLoop {
         this.state.round.startFrameCount = frameCount;
         Dash.startFrameCount = -1000;
         Intern.prepareNextRound();
+        createBackground();
+        game.elves.getPlayer().scalar = 1;
+        // game.elves.getPlayer().placeElfAtFloor();
         // game.elves.resetPlayerPosition();
     }
 

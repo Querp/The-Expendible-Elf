@@ -2,15 +2,15 @@ function applyDebugSettings() {
     // return
 
     const balance = 10000;
-    const round = 2;
+    const round = 1;
     const present = {
         dropHeight: 0,
-        fallSpeed: 1.45,   // 1.45 default
+        // fallSpeed: 1.45,   // 1.45 default
         interval: 30,    // 120 default
     }
     const upgradeAmount = {
-        health: 999,
-        speed: 20,
+        health: 0,
+        speed: 0,
         dash: 0,
         intern: 0,
     }
@@ -21,7 +21,7 @@ function applyDebugSettings() {
     game.gameState.round.counter = round;
 
     Present.dropHeight = present.dropHeight;
-    Present.fallSpeed = present.fallSpeed;
+    // Present.fallSpeed = present.fallSpeed;
     game.presents.baseSpawnInterval = present.interval;
     game.presents.minSpawnInterval = 1;
 

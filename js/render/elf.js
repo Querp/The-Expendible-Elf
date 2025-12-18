@@ -35,7 +35,7 @@ function drawElf(elf) {
     cnv.fill('#ffffff25')
 
     // debug radius 
-    cnv.circle(0,0,30);
+    // cnv.circle(0,0,30);
     
     // debug height 
     // cnv.rect(0,0,30,55);

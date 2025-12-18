@@ -1,4 +1,7 @@
 function createBackground() {
+    if (game.gameState.round.counter !== 1) return
+    console.log('createBackground');
+    
     bgCnv.background('#333')
 
     // gradient bg

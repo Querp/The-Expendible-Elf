@@ -3,7 +3,7 @@ class Present {
     static CATCH_CHECK_HEIGHT = 70;
 
     static dropHeight = -10;
-    static fallSpeed = 1.45;
+    // static fallSpeed = 1.45;
     static priceWhenCaught = 50;
     static timeToDespawn = 150;
     static colorHues = { pink: 325, blue: 210, green: 107, yellow: 48 };
@@ -11,7 +11,7 @@ class Present {
     // 'hsla(107, 50%, 50%, 1.00)' 'hsla(48, 50%, 50%, 1.00)'
 
     constructor() {
-        const rubbleRange = random(15,25);
+        const rubbleRange = random(15, 25);
 
         this.pos = { x: random(width), y: Present.dropHeight };
         this.color = this.getRandomPresentColor();
@@ -21,7 +21,7 @@ class Present {
         this.rubblePositions = [random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange)];
         this.markedForDeletion = false;
         this.radius = 10;
-        this.fallSpeed = 1.45 + game.gameState.round.startFrameCount / 1000 
+        this.fallSpeed = this.getFallSpeed();
     }
 
     getRandomPresentColor() {
@@ -29,6 +29,10 @@ class Present {
         const randomKey = random(keys);
         const hue = Present.colorHues[randomKey]
         return color(hue, 50, 50, 1.0);
+    }
+
+    getFallSpeed() {
+        return 1.45 + (frameCount - game.gameState.round.startFrameCount) / 700;
     }
 
     getElapsedTimeSinceCatch() {

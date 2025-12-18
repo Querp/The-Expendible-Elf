@@ -4,8 +4,8 @@ class Elves {
     }
 
     createPlayer() {
-        // const player = new Elf('player', 140, height, 2);
-        const player = new Elf('player');
+        const player = new Elf('player', width/2, 150, 2);
+        // const player = new Elf('player');
         this.add(player);
         return player
     }

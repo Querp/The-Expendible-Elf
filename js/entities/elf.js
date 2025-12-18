@@ -5,6 +5,7 @@ class Elf {
         this.type = type;
         this.pos = { x: x, y: y };
         this.vel = { x: 0, y: 0 };
+        this.acc = { x: 0, y: 0 };
         this.speed = 10;
         this.angle = {
             self: 0,
@@ -20,12 +21,6 @@ class Elf {
         this.placeElfAtFloor();
     }
 
-    placeElfAtFloor() {
-        const FLOOR_Y = height - 20;
-        const elfHeight = this.height * this.scalar;
-        this.pos.y = FLOOR_Y - elfHeight / 2;
-    }
-
     update() {
         calcElfLimbAngles(this);
         calcElfSelfAngle(this);
@@ -37,22 +32,69 @@ class Elf {
         this.catchPresent();
     }
 
+    getFloorY() {
+        return height - 20;
+    }
+
+    getElfOnFloorPosY() {
+        const elfHeight = this.height * this.scalar;
+        return this.getFloorY() - elfHeight / 2;
+    }
+
+    placeElfAtFloor() {
+        this.pos.y = this.getElfOnFloorPosY();
+    }
+
+    isELfAboveFloor() {
+        return this.pos.y < this.getElfOnFloorPosY();
+    }
+
+    updateAcceleration(direction) {
+        if (!direction) {
+            this.acc.x = 0;
+            this.acc.y = 0;
+        }
+
+        if (Dash.isDashBlockingInput) return
+
+        if (Dash.dashing) {
+            if (direction === 'left') {
+                this.acc.x = -1;
+                this.vel.x = -1;
+            };
+            if (direction === 'right') {
+                this.acc.x = 1;
+                this.vel.x = 1;
+            };
+            Dash.isDashBlockingInput = true
+        } else {
+            this.vel.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
+            this.acc.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
+        }
+    }
+
     move() {
+        this.updateVel();
+        this.updatePosX();
+        this.updatePosY();
+    }
+
+    updateVel() {
+        this.vel.x += this.acc.x;
+        this.vel.y += this.acc.y;
+    }
+
+    updatePosX() {
         if (Dash.dashing) return
         const speed = this.getSpeed();
         this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
     }
 
-    updateVel(direction) {
-        if (Dash.isDashBlockingInput) return
-
-        if (Dash.dashing) {
-            if (direction === 'left') this.vel.x = -1;
-            if (direction === 'right') this.vel.x = 1;
-            Dash.isDashBlockingInput = true
-        } else {
-            this.vel.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
+    updatePosY() {
+        if (this.isELfAboveFloor()) {
+            this.pos.y += 4.5;
         }
+        this.pos.y = constrain(this.pos.y, 0, this.getElfOnFloorPosY());
     }
 
     dash() {
@@ -112,7 +154,7 @@ class Elf {
             game.messages.addMessage('🐱‍🏍 Dash is not available', 'warning');
             return
         }
-        if (!game.gameState.round.hasStarted) return
+        // if (!game.gameState.round.hasStarted) return
 
         const effective = Dash.getEffectiveDashCooldown();
         const endFrame = Dash.startFrameCount + effective;

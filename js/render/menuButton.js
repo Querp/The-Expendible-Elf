@@ -77,7 +77,7 @@ function drawMenuButton(button) {
     cnv.text(statValue, button.x, button.y + 100)
 
     // icon
-    drawIcon(button.x, button.y + 10, button.name)
+    drawIcon(button.x, button.y + 19, button.name)
 }
 
 function drawIcon(desiredX, desiredY, name) {
