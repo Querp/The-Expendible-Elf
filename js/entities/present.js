@@ -11,7 +11,7 @@ class Present {
     // 'hsla(107, 50%, 50%, 1.00)' 'hsla(48, 50%, 50%, 1.00)'
 
     constructor() {
-        const rubbleRange = random(5,25);
+        const rubbleRange = random(15,25);
 
         this.pos = { x: random(width), y: Present.dropHeight };
         this.color = this.getRandomPresentColor();

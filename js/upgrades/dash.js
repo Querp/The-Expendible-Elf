@@ -12,10 +12,14 @@ class Dash {
 
     static checkEndOfDash() {
         if (frameCount - this.startFrameCount >= this.duration && this.dashing) {
-            this.dashing = false;
-            this.cooldownStartFrame = frameCount;
-            this.isDashBlockingInput = false;
+            this.endDash();
         }
+    }
+
+    static endDash() {
+        this.dashing = false;
+        this.cooldownStartFrame = frameCount;
+        this.isDashBlockingInput = false;
     }
 
     static getEffectiveDashCooldown() {

@@ -19,7 +19,7 @@ class Elf {
         this.placeElfAtFloor();
     }
 
-    placeElfAtFloor(){
+    placeElfAtFloor() {
         const FLOOR_Y = height - 20;
         const elfHeight = this.height * this.scalar;
         this.pos.y = FLOOR_Y - elfHeight / 2;
@@ -117,12 +117,14 @@ class Elf {
         const endFrame = Dash.startFrameCount + effective;
         const player = game.elves.getPlayer();
 
+        if (Dash.dashing) {
+            Dash.endDash();
+        }
         if (!Dash.dashing && frameCount >= endFrame && player.vel.x !== 0) {
             Dash.dashing = true;
             Dash.isDashBlockingInput = true;
             Dash.startFrameCount = frameCount;
+            console.log('dash!');
         }
     }
-
-
 }

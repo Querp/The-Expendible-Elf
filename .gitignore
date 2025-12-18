@@ -2,7 +2,7 @@
 notes.txt
 
 # Private debug settings
-debugSettings.js
+js/systems/debugSettings.js
 
 # Logs
 logs

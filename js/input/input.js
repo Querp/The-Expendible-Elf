@@ -1,5 +1,4 @@
 class Input {
-
     constructor(name, keyCode, action = 'press') {
     this.name = name;
     this.keyCode = keyCode;
