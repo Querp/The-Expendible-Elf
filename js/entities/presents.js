@@ -4,7 +4,7 @@ class Presents {
         this.baseSpawnInterval = 120;
         // this.baseSpawnInterval = 30;
         this.spawnInterval = this.baseSpawnInterval;
-        this.spawnSpeedMultiplier = 0.01;
+        this.spawnSpeedMultiplier = 0.005;
         this.minSpawnInterval = 30;
         this.nextPresentFrame = 0;
     }

@@ -20,6 +20,9 @@ function drawLog() {
         },
     ];
 
+    cnv.push();
+    cnv.textFont('Sans-serif')
+
     // BG
     cnv.fill('#0a1115c9')
     // rect(width / 2, height / 2, width, height)
@@ -35,6 +38,8 @@ function drawLog() {
     cnv.textAlign(CENTER)
     drawPlayerPos();
     drawPresentPos();
+
+    cnv.pop();
 }
 
 function drawLogItem(item, i) {

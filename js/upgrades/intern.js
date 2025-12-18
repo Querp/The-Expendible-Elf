@@ -25,8 +25,14 @@ class Intern {
             return;
         }
 
-        this.lastPlacedIndex = (this.lastPlacedIndex + 1) % interns.length;
         interns[this.lastPlacedIndex].pos.x = x;
+        this.lastPlacedIndex = (this.lastPlacedIndex + 1) % interns.length;
+    }
+    
+    static getNextInternToMove() {
+        const interns = game.elves.elves.filter(e => e.type === 'intern');
+        if (interns.length === 0) return null;
+        return interns[this.lastPlacedIndex];
     }
 
     static prepareNextRound() {

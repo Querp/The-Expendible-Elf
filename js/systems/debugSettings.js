@@ -1,19 +1,23 @@
 function applyDebugSettings() {
-    return
+    // return
 
+    const balance = 10000;
     const round = 2;
     const present = {
         dropHeight: 0,
-        fallSpeed: 3,   // 1.45 default
-        interval: 50,    // 120 default
+        fallSpeed: 1.45,   // 1.45 default
+        interval: 30,    // 120 default
     }
     const upgradeAmount = {
         health: 999,
         speed: 20,
-        dash: 5,
-        intern: 2,
+        dash: 0,
+        intern: 0,
     }
 
+
+
+    game.gameState.balance = balance;
     game.gameState.round.counter = round;
 
     Present.dropHeight = present.dropHeight;

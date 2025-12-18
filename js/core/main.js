@@ -18,9 +18,9 @@ function setup() {
         buttons: new Buttons,
         messages: new Messages,
         cooldowns: new Cooldowns,
+        inputs: new Inputs,
         gameState: gameState,
         gameLoop: gameLoop,
-        inputs: new Inputs
     }
 
     setupDrawingModes();
@@ -38,6 +38,13 @@ function draw() {
     game.gameLoop.update();
     image(bgCnv, 0, 0);
     image(cnv, 0, 0);
+
+
+    // show nextInternToMove
+    // bug: don't show when not all interns all spawned
+    const i = Intern.getNextInternToMove();
+    noStroke()
+    if (i) circle(i.pos.x, i.pos.y-70, 10)
 }
 
 

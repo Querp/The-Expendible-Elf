@@ -40,7 +40,8 @@ body {
 
             background: rgba(120, 31, 31, 0.88);
             color: #ddddddd1;
-            font-family: monospace ;
+            /* font-family: monospace ; */
+            font-family: Bangers;
             font-size: 0.8rem;
             font-weight: 100;
             padding: 0.5rem 1.15rem;

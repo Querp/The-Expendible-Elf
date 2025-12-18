@@ -21,6 +21,7 @@ class Present {
         this.rubblePositions = [random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange), random(-rubbleRange, rubbleRange)];
         this.markedForDeletion = false;
         this.radius = 10;
+        this.fallSpeed = 1.45 + game.gameState.round.startFrameCount / 1000 
     }
 
     getRandomPresentColor() {
@@ -48,7 +49,7 @@ class Present {
         }
         if (this.hasFallenToTheFloor || this.hasBeenCaught) return
         if (this.pos.y < height - Present.FLOOR_Y_OFFSET) {
-            this.pos.y += Present.fallSpeed;
+            this.pos.y += this.fallSpeed;
         } else {
             this.pos.y = height - Present.FLOOR_Y_OFFSET;
         }
