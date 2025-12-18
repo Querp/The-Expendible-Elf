@@ -1,7 +1,7 @@
 class GameState {
     constructor() {
-        this.balance = 1600;
-        this.baseHealth = 1600;
+        this.balance = 0;
+        this.baseHealth = 1000;
         this.health = this.baseHealth;
         this.healthBar = { height: 1000 };
 

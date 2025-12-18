@@ -91,6 +91,8 @@ class Elf {
                 this.dashCombo();
                 const value = present.catch();
                 game.gameState.balance += value;
+                // this.scalar += 0.01;
+                // this.placeElfAtFloor();
             }
         }
     }

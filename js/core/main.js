@@ -29,14 +29,15 @@ function setup() {
     game.upgrades.createUpgrades();
     game.buttons.createButtons();
     game.inputs.setup();
+    applyDebugSettings();
 }
 
 function draw() {
     cnv.clear();
     game.inputs.update();
     game.gameLoop.update();
-    image(bgCnv, 0, 0)
-    image(cnv, 0, 0)
+    image(bgCnv, 0, 0);
+    image(cnv, 0, 0);
 }
 
 
@@ -53,3 +54,4 @@ function mousePressed() {
         Input.handleButtonClick(buttonName, game.gameState, game.gameLoop);
     }
 }
+

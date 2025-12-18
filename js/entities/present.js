@@ -2,8 +2,8 @@ class Present {
     static FLOOR_Y_OFFSET = 25;
     static CATCH_CHECK_HEIGHT = 70;
 
-    // static fallSpeed = 1.45;
-    static fallSpeed = 100;
+    static dropHeight = -10;
+    static fallSpeed = 1.45;
     static priceWhenCaught = 50;
     static timeToDespawn = 150;
     static colorHues = { pink: 325, blue: 210, green: 107, yellow: 48 };
@@ -11,11 +11,9 @@ class Present {
     // 'hsla(107, 50%, 50%, 1.00)' 'hsla(48, 50%, 50%, 1.00)'
 
     constructor() {
-        const rubbleRange = 15;
-        let dropHeight = -10;
-        // dropHeight = height * 0.98;
+        const rubbleRange = random(5,25);
 
-        this.pos = { x: random(width), y: dropHeight };
+        this.pos = { x: random(width), y: Present.dropHeight };
         this.color = this.getRandomPresentColor();
         this.hasBeenCaught = false;
         this.hasBeenCaughtAtFrameCount = null;

@@ -4,7 +4,7 @@ class Elves {
     }
 
     createPlayer() {
-        // const player = new Elf('player', 140, height, 1);
+        // const player = new Elf('player', 140, height, 2);
         const player = new Elf('player');
         this.add(player);
         return player
