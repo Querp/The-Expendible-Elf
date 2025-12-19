@@ -13,7 +13,7 @@ class Present {
     constructor() {
         const rubbleRange = random(15, 25);
 
-        this.pos = { x: random(width), y: Present.dropHeight };
+        this.pos = { x: random(200, width-200), y: Present.dropHeight };
         this.color = this.getRandomPresentColor();
         this.hasBeenCaught = false;
         this.hasBeenCaughtAtFrameCount = null;

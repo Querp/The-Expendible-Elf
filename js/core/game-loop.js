@@ -37,9 +37,12 @@ class GameLoop {
         const inputs = game.inputs;
         const player = game.elves.getPlayer();
 
-        if (inputs.isDown('LEFT')) player.updateAcceleration('left');
-        else if (inputs.isDown('RIGHT')) player.updateAcceleration('right');
-        else player.updateAcceleration(null);
+        if (inputs.isDown('LEFT_down')) player.updateAccelerationX('left');
+        else if (inputs.isDown('RIGHT_down')) player.updateAccelerationX('right');
+        else player.updateAccelerationX(null);
+
+        if (inputs.consume('UP')) player.jump();
+        if (inputs.isDown('UP_down')) player.updateAccelerationY('up');
 
         if (inputs.consume('DOWN')) Intern.placeIntern(player.pos.x);
 

@@ -6,8 +6,11 @@ class Inputs {
 
     setup() {
         const defs = [
-            new Input('LEFT', LEFT_ARROW, 'down'),
-            new Input('RIGHT', RIGHT_ARROW, 'down'),
+            new Input('LEFT_down', LEFT_ARROW, 'down'),
+            new Input('RIGHT_down', RIGHT_ARROW, 'down'),
+            new Input('UP_down', UP_ARROW, 'down'),
+
+            new Input('UP', UP_ARROW, 'press'),
             new Input('DOWN', DOWN_ARROW, 'press'),
             new Input('ENTER', ENTER, 'press'),
             new Input('SPACE', 32, 'press'),
@@ -49,7 +52,7 @@ class Inputs {
 
     /** Convenience */
     isDown(name) {
-        return !!this.state[name];
+        return !!this.state[name]; 
     }
 
 }

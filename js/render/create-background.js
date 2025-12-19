@@ -7,6 +7,12 @@ function createBackground() {
     // gradient bg
     gradientBG(color(0, 0, 30), color(260, 2, 10));
 
+    // walls
+    bgCnv.noStroke()
+    bgCnv.fill('rgba(0, 0, 0, 0.47)')
+    bgCnv.rect(100,height/2, 200, height)
+    bgCnv.rect(width-100,height/2, 200, height)
+
     // elf house
     bgCnv.noStroke()
     bgCnv.fill('#4a4a4aff')
@@ -25,7 +31,7 @@ function createBackground() {
     // floor
     bgCnv.noStroke()
     bgCnv.fill('#fff');
-    bgCnv.rect(width / 2, height - 10, width, 20)
+    bgCnv.rect(width / 2, height - 10, width - 400, 20)
 }
 
 function gradientBG(c1, c2) {

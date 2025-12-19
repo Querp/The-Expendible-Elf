@@ -1,6 +1,7 @@
 class Elf {
     static CATCH_RANGE = 26
-    static GRAVITY = 0.25;
+    static GRAVITY = 0.5;
+    static WALL_OFFSET = 200;
 
     constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1, color = '#388e3fff') {
         this.type = type;
@@ -9,7 +10,8 @@ class Elf {
         this.acc = { x: 0, y: 0 };
         this.speed = 1;
         this.maxSpeed = 30;
-        this.drag = 0.85;
+        this.maxFallSpeed = 6;
+        this.drag = 0.81;
         this.angle = {
             self: 0,
             arm: { left: -7, right: 7, },
@@ -21,6 +23,9 @@ class Elf {
         this.height = 55; // at scale 1.0
         this.radius = 15;
         this.color = color;
+        this.jumpStrength = 6;
+        this.floatStrength = 0.35;
+
         this.placeElfAtFloor();
     }
 
@@ -57,16 +62,18 @@ class Elf {
     }
 
     isOnFloor() {
-        return this.pos.y === this.getPosYForElfOnFloor();
+        return abs(this.pos.y - this.getPosYForElfOnFloor()) < 0.01;
     }
 
     // handle input(direction) 
-    updateAcceleration(direction) {
-        if (Dash.isDashBlockingInput || Dash.dashing) return
+    updateAccelerationX(direction) {
+        // X...
+        if (Dash.isDashBlockingInput || Dash.dashing) {
+            return
+        }
 
         if (!direction) {
             this.acc.x = 0;
-            this.acc.y = 0;
         }
 
         if (Dash.dashing) {
@@ -74,6 +81,15 @@ class Elf {
         } else {
             this.acc.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
         }
+    }
+
+    updateAccelerationY() {
+        this.vel.y -= this.floatStrength;
+    }
+
+
+    jump() {
+        if (this.isOnFloor()) this.vel.y -= this.jumpStrength;
     }
 
     applyDashForces(direction) {
@@ -93,7 +109,7 @@ class Elf {
     }
 
     updatePosY() {
-        this.pos.y += this.vel.y * Elf.GRAVITY;
+        this.pos.y += this.vel.y;
 
         const floorY = this.getPosYForElfOnFloor();
         if (this.pos.y > floorY) {
@@ -103,17 +119,14 @@ class Elf {
     }
 
     checkWalls() {
-        const wallOffset = 12;
+        const wallOffset = Elf.WALL_OFFSET;
         if (!Dash.dashing) {
-            if (this.pos.x < wallOffset || this.pos.x > width - wallOffset) {
-                this.vel.x = 0;
-            }
-            this.pos.x = constrain(this.pos.x, wallOffset, width - wallOffset);
+            this.pos.x = constrain(this.pos.x, wallOffset + this.radius, width - wallOffset - this.radius);
             return
         }
         // loop player to other side of screen
-        if (this.pos.x < 0) this.pos.x = width;
-        if (this.pos.x > width) this.pos.x = 0;
+        if (this.pos.x < wallOffset + this.radius) this.pos.x = width - wallOffset - this.radius;
+        if (this.pos.x > width - wallOffset - this.radius) this.pos.x = wallOffset + this.radius;
     }
 
     getSpeed() {
@@ -134,8 +147,6 @@ class Elf {
                 this.dashCombo();
                 const value = present.catch();
                 game.gameState.balance += value;
-                // this.scalar += 0.01;
-                // this.placeElfAtFloor();
             }
         }
     }
