@@ -18,6 +18,14 @@ function drawLog() {
             title: 'Spawn Interval',
             value: `${game.presents.spawnInterval.toFixed(2)}`
         },
+        {
+            title: 'X Acc',
+            value: `${game.elves.getPlayer().acc.x}`
+        },
+        {
+            title: 'X Vel',
+            value: `${game.elves.getPlayer().vel.x.toFixed(2)}`
+        },
     ];
 
     cnv.push();
@@ -43,7 +51,7 @@ function drawLog() {
 }
 
 function drawLogItem(item, i) {
-    const rowHeight = 18;
+    const rowHeight = 16;
     const y = 15 + i * rowHeight;
 
     cnv.textSize(15)

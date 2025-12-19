@@ -2,7 +2,7 @@ function applyDebugSettings() {
     // return
 
     const balance = 10000;
-    const round = 1;
+    const round = 2;
     const present = {
         dropHeight: 0,
         // fallSpeed: 1.45,   // 1.45 default
@@ -11,8 +11,8 @@ function applyDebugSettings() {
     const upgradeAmount = {
         health: 0,
         speed: 0,
-        dash: 0,
-        intern: 0,
+        dash: 6,
+        intern: 10,
     }
 
 

@@ -1,15 +1,18 @@
 class Elf {
     static CATCH_RANGE = 26
+    static GRAVITY = 0.25;
 
     constructor(type = 'intern', x = width / 2, y = height - 50, scalar = 1, color = '#388e3fff') {
         this.type = type;
         this.pos = { x: x, y: y };
         this.vel = { x: 0, y: 0 };
         this.acc = { x: 0, y: 0 };
-        this.speed = 10;
+        this.speed = 1;
+        this.maxSpeed = 30;
+        this.drag = 0.85;
         this.angle = {
             self: 0,
-            arm: { left: -7, right: 155, },
+            arm: { left: -7, right: 7, },
             leg: { left: 0, right: 0, }
         };
         this.eyePosX = { left: -2.5, right: 2.5 }
@@ -26,80 +29,77 @@ class Elf {
         calcElfSelfAngle(this);
         if (this.type === 'player') {
             this.move();
-            this.dash();
             this.checkWalls();
         }
         this.catchPresent();
+    }
+
+    move() {
+        ElfMovement.applyGravity(this);
+        ElfDash.dash(this);
+        ElfMovement.updateVelocity(this);
+        this.updatePosX();
+        this.updatePosY();
+        ElfMovement.applyDrag(this);
     }
 
     getFloorY() {
         return height - 20;
     }
 
-    getElfOnFloorPosY() {
+    getPosYForElfOnFloor() {
         const elfHeight = this.height * this.scalar;
         return this.getFloorY() - elfHeight / 2;
     }
 
     placeElfAtFloor() {
-        this.pos.y = this.getElfOnFloorPosY();
+        this.pos.y = this.getPosYForElfOnFloor();
     }
 
-    isELfAboveFloor() {
-        return this.pos.y < this.getElfOnFloorPosY();
+    isOnFloor() {
+        return this.pos.y === this.getPosYForElfOnFloor();
     }
 
+    // handle input(direction) 
     updateAcceleration(direction) {
+        if (Dash.isDashBlockingInput || Dash.dashing) return
+
         if (!direction) {
             this.acc.x = 0;
             this.acc.y = 0;
         }
 
-        if (Dash.isDashBlockingInput) return
-
         if (Dash.dashing) {
-            if (direction === 'left') {
-                this.acc.x = -1;
-                this.vel.x = -1;
-            };
-            if (direction === 'right') {
-                this.acc.x = 1;
-                this.vel.x = 1;
-            };
-            Dash.isDashBlockingInput = true
+            this.applyDashForces(direction);
         } else {
-            this.vel.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
             this.acc.x = direction === 'left' ? -1 : direction === 'right' ? 1 : 0;
         }
     }
 
-    move() {
-        this.updateVel();
-        this.updatePosX();
-        this.updatePosY();
+    applyDashForces(direction) {
+        if (direction === 'left') {
+            this.acc.x = -1;
+        };
+        if (direction === 'right') {
+            this.acc.x = 1;
+        };
+        Dash.isDashBlockingInput = true
     }
 
-    updateVel() {
-        this.vel.x += this.acc.x;
-        this.vel.y += this.acc.y;
-    }
 
     updatePosX() {
-        if (Dash.dashing) return
         const speed = this.getSpeed();
         this.pos.x += this.vel.x * speed * (this.scalar * 0.15);
     }
 
     updatePosY() {
-        if (this.isELfAboveFloor()) {
-            this.pos.y += 4.5;
-        }
-        this.pos.y = constrain(this.pos.y, 0, this.getElfOnFloorPosY());
-    }
+        this.pos.y += this.vel.y * Elf.GRAVITY;
 
-    dash() {
-        if (!Dash.dashing) return
-        this.pos.x += this.getDashSpeed();
+        const floorY = this.getPosYForElfOnFloor();
+        if (this.pos.y > floorY) {
+            this.pos.y = floorY;
+            this.vel.y = 0;
+        }
     }
 
     checkWalls() {
@@ -118,7 +118,7 @@ class Elf {
 
     getSpeed() {
         const speedUpgradesAmount = game.upgrades.upgrades['speed'].amount;
-        return this.speed + speedUpgradesAmount * 1;
+        return this.speed + speedUpgradesAmount * 0.25;
     }
 
     getDashSpeed() {
@@ -167,7 +167,7 @@ class Elf {
             Dash.dashing = true;
             Dash.isDashBlockingInput = true;
             Dash.startFrameCount = frameCount;
-            console.log('dash!');
+            // player.vel.x += player.acc.x * 1000.1;
         }
     }
 }

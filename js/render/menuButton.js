@@ -57,18 +57,17 @@ function drawMenuButton(button) {
     const fps = 60;
     let statValue;
 
-
     if (button.name === 'intern') {
-        statValue = `${game.upgrades.upgrades[button.name].amount}x`;
+        statValue = `${game.upgrades.upgrades[button.name].amount} x`;
         if (game.upgrades.upgrades.intern.amount === 0) statValue = '';
     }
     if (button.name === 'dash') {
-        statValue = `${((Dash.getEffectiveDashCooldown() - Dash.duration) / fps).toFixed(2)}s`;
+        statValue = `${((Dash.getEffectiveDashCooldown() - Dash.duration) / fps).toFixed(2)} s`;
         if (game.upgrades.upgrades.dash.amount === 0) statValue = '';
     }
     const player = game.elves.getPlayer();
-    if (button.name === 'speed') statValue = `${player.speed + game.upgrades.upgrades[button.name].amount}vel`;
-    if (button.name === 'health') statValue = `${Upgrade.calcStatValue(button.name)}hp`;
+    if (button.name === 'speed') statValue = `${player.speed + game.upgrades.upgrades[button.name].amount} vel`;
+    if (button.name === 'health') statValue = `${Upgrade.calcStatValue(button.name)} hp`;
 
     cnv.textSize(20)
     cnv.fill('#555')

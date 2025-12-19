@@ -12,13 +12,13 @@ function drawElf(elf) {
 
     drawElfHead(elf);
 
-    if (elf.vel.x === 0) {
+    if (elf.acc.x === 0) {
         drawElfChest(elf);
         drawElfLegLeft(elf);
         drawElfLegRight(elf);
         drawElfArmLeft(elf);
         drawElfArmRight(elf);
-    } else if (elf.vel.x === -1) {
+    } else if (elf.acc.x === -1) {
         drawElfLegRight(elf);
         drawElfArmRight(elf);
         drawElfChest(elf);
@@ -54,16 +54,16 @@ function drawElfHead(elf) {
     cnv.stroke(255);
     let eyeLeftOffset = 0;  // perspective of user
     let eyeRightOffset = 0; // perspective of user
-    if (elf.vel.x === 1) eyeRightOffset = -1;
-    if (elf.vel.x === -1) eyeLeftOffset = 1;
-    const targetEyeLeftX = -2.5 + elf.vel.x * 7 + eyeLeftOffset * 2;
-    const targetEyeRightX = 2.5 + elf.vel.x * 7 + eyeRightOffset * 2;
+    if (elf.acc.x === 1) eyeRightOffset = -1;
+    if (elf.acc.x === -1) eyeLeftOffset = 1;
+    const targetEyeLeftX = -2.5 + elf.acc.x * 7 + eyeLeftOffset * 2;
+    const targetEyeRightX = 2.5 + elf.acc.x * 7 + eyeRightOffset * 2;
 
     elf.eyePosX.left = lerp(elf.eyePosX.left, targetEyeLeftX, 0.3)
     elf.eyePosX.right = lerp(elf.eyePosX.right, targetEyeRightX, 0.3)
 
-    cnv.circle(elf.eyePosX.left, -8, constrain((2.3 + elf.vel.x * 0.75), 0, 2.3));
-    cnv.circle(elf.eyePosX.right, -8, constrain((2.3 - elf.vel.x * 0.75), 0, 2.3));
+    cnv.circle(elf.eyePosX.left, -8, constrain((2.3 + elf.acc.x * 0.75), 0, 2.3));
+    cnv.circle(elf.eyePosX.right, -8, constrain((2.3 - elf.acc.x * 0.75), 0, 2.3));
 
     cnv.noStroke();
     cnv.fill(elf.color);
@@ -79,13 +79,13 @@ function drawElfHead(elf) {
 }
 
 function drawElfChest(elf) {
-    const chestWidth = elf.vel.x === 0 ? 10.5 : 6;
+    const chestWidth = elf.acc.x === 0 ? 10.5 : 6;
     cnv.fill(elf.color);
     cnv.rect(0, 5.5, chestWidth, 14, 3);
 }
 
 function drawElfArmLeft(elf) {
-    const xOffset = elf.vel.x !== 0 ? 0 : 4;
+    const xOffset = elf.acc.x !== 0 ? 0 : 4;
     cnv.fill('#e2c68fff');
     cnv.push();
     cnv.translate(xOffset, 0)
@@ -96,7 +96,7 @@ function drawElfArmLeft(elf) {
 }
 
 function drawElfArmRight(elf) {
-    const xOffset = elf.vel.x !== 0 ? 0 : -4;
+    const xOffset = elf.acc.x !== 0 ? 0 : -4;
     cnv.fill('#e2c68fff');
     cnv.push();
     cnv.translate(xOffset, 0);
@@ -109,8 +109,8 @@ function drawElfArmRight(elf) {
 }
 
 function drawElfLegLeft(elf) {
-    const xOffset = elf.vel.x !== 0 ? 0 : 3;
-    const shoeWidth = elf.vel.x !== 0 ? 5 : 3;
+    const xOffset = elf.acc.x !== 0 ? 0 : 3;
+    const shoeWidth = elf.acc.x !== 0 ? 5 : 3;
     cnv.push();
     cnv.translate(xOffset, 11.45);
 
@@ -120,7 +120,7 @@ function drawElfLegLeft(elf) {
     cnv.rect(0, 7, 1.8, 16, 99);
 
     cnv.fill('#8f7657ff');
-    cnv.rect(elf.vel.x * 1.5, 15.3, shoeWidth, 2, 0.5);
+    cnv.rect(elf.acc.x * 1.5, 15.3, shoeWidth, 2, 0.5);
 
     cnv.fill('#ecececff');
     cnv.rect(0, 2, 1.8, 2.5);
@@ -130,8 +130,8 @@ function drawElfLegLeft(elf) {
 }
 
 function drawElfLegRight(elf) {
-    const xOffset = elf.vel.x !== 0 ? 0 : -3;
-    const shoeWidth = elf.vel.x !== 0 ? 5 : 3;
+    const xOffset = elf.acc.x !== 0 ? 0 : -3;
+    const shoeWidth = elf.acc.x !== 0 ? 5 : 3;
     cnv.push();
     cnv.translate(xOffset, 11.45);
 
@@ -141,7 +141,7 @@ function drawElfLegRight(elf) {
     cnv.rect(0, 7, 1.8, 16, 99);
 
     cnv.fill('#8f7657ff');
-    cnv.rect(elf.vel.x * 1.5, 15.3, shoeWidth, 2, 0.5);
+    cnv.rect(elf.acc.x * 1.5, 15.3, shoeWidth, 2, 0.5);
 
     cnv.fill('#ecececff');
     cnv.rect(0, 2, 1.8, 2.5);

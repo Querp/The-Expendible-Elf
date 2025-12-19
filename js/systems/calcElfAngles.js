@@ -5,7 +5,7 @@ function calcElfSelfAngle(elf) {
         multiplier = 90;
         lerpSpeed = 0.3;
     }
-    let targetAngle = elf.vel.x * multiplier;
+    let targetAngle = elf.acc.x * multiplier;
 
     elf.angle.self = lerp(elf.angle.self, targetAngle, lerpSpeed);
 }
@@ -21,7 +21,7 @@ function calcElfLimbAngles(elf) {
         elf.angle.arm.right = -25;
     }
 
-    if (elf.vel.x === 0) {
+    if (elf.acc.x === 0) {
         elf.angle.leg.left = lerp(elf.angle.leg.left, 0, lerpSpeed * 1.35)
         elf.angle.leg.right = lerp(elf.angle.leg.right, 0, lerpSpeed * 1.35);
         elf.angle.arm.left = lerp(elf.angle.arm.left, -150, lerpSpeed * 0.9);
